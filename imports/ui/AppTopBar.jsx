@@ -24,7 +24,7 @@ export const AppTopBar = function() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Site title
+            Pizza parmezano
           </Typography>
 
           <LoginButtons/>
