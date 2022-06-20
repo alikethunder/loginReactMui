@@ -20,15 +20,36 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 //const theme = createTheme();
 
 export default function SignIn() {
+
+  const [showPassword, setShowPassword] = React.useState(false);
+  const [emailIsValid, setEmailIsValid] = React.useState(true);
+  const [emailFirstBlur, setEmailFirstBlur] = React.useState(true);
+
+  const blur = (e)=>{
+    setEmailFirstBlur(false);
+    setEmailIsValid(!!e.target.value.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/));
+  }
+
+  const validateEmail = (e) =>{
+    if (!emailFirstBlur){
+      setEmailIsValid(!!e.target.value.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/));
+    }
+  }
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+    if (emailIsValid && data.get('email').length){
+      console.log({
+        email: data.get('email'),
+        password: data.get('password'),
+      });
+    }
+    else {
+      setEmailIsValid(false);
+      console.log('email is invalid');
+    }
   };
-  const [showPassword, setShowPassword] = React.useState(false);
 
   const handleClickShowPassword = (event) => {
     setShowPassword(!showPassword);
@@ -67,6 +88,13 @@ export default function SignIn() {
             label="Email Address"
             autoComplete="email"
             autoFocus
+
+            onBlur={blur}
+
+            onChange={validateEmail}
+            error={!emailIsValid}
+            helperText={!emailIsValid ? "Incorrect email" : ' '}
+            sx={{mb:0}}
           />
 
           <TextField name="password"
