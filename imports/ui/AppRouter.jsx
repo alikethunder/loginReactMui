@@ -8,9 +8,9 @@ import {
 import CssBaseline from '@mui/material/CssBaseline';
 import { AppTopBar} from './AppTopBar';
 
-import SignIn from './routes/SignIn';
-import SignUp from './routes/SignUp';
-import ForgotPassword from './routes/ForgotPassword';
+import SignIn from './routes/AccountsForms/SignIn';
+import SignUp from './routes/AccountsForms/SignUp';
+import ForgotPassword from './routes/AccountsForms/ForgotPassword';
 
 
 export const AppRouter = () => (
