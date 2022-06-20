@@ -32,8 +32,9 @@ export default function SignIn() {
 
   const handleClickShowPassword = (event) => {
     setShowPassword(!showPassword);
+    let e = event.target.closest('.MuiInputBase-root').querySelector('input');
     setTimeout(function(){
-      document.getElementById('password').setSelectionRange(-1, -1);
+      e.setSelectionRange(-1, -1);
     });
   };
 
