@@ -1,24 +1,35 @@
 import React from 'react';
 import {
-  BrowserRouter as Router,
-  Switch,
+  BrowserRouter,
+  Routes,
   Route,
   Link
 } from "react-router-dom";
 import CssBaseline from '@mui/material/CssBaseline';
 import { AppTopBar} from './AppTopBar';
-import { Hello } from './Hello.jsx';
-import { Info } from './Info.jsx';
 
+import SignIn from './routes/SignIn';
+import SignUp from './routes/SignUp';
+import ForgotPassword from './routes/ForgotPassword';
 
 
 export const AppRouter = () => (
-  <Router>
+  <BrowserRouter>
+
     <CssBaseline/>
     <AppTopBar/>
-    <h1>Welcome to Meteor!</h1>
-    <Hello/>
-    <Info/>
+    
+    <Routes>
 
-  </Router>
+      <Route path="signin" element={<SignIn/>} />
+
+      <Route path="signup" element={<SignUp/>} />
+
+      <Route path="forgot_password" element={<ForgotPassword/>} />
+
+    </Routes>
+
+
+
+  </BrowserRouter>
 );

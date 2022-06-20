@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link as RouterLink, MemoryRouter } from 'react-router-dom';
+
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
@@ -29,7 +31,7 @@ export default function LoginButtons() {
     return (
         <React.Fragment>
             <Box>
-                <Button color="inherit" startIcon={<LoginIcon/>}>Login</Button>
+                <Button color="inherit" startIcon={<LoginIcon/>} component={RouterLink} to="/signin">Login</Button>
                 <IconButton
                     aria-label="ArrowDropDownIcon"
                     size="large"
@@ -52,7 +54,7 @@ export default function LoginButtons() {
                 dense="true"
             >
                 <MenuList dense>
-                    <MenuItem>
+                    <MenuItem component={RouterLink} to="/signup">
                         <ListItemIcon>
                             <AssignmentIcon fontSize="small" />
                         </ListItemIcon>
@@ -61,7 +63,7 @@ export default function LoginButtons() {
 
                     <Divider/>
 
-                    <MenuItem>
+                    <MenuItem component={RouterLink} to="/forgot_password">
                         <ListItemIcon>
                             <PasswordIcon fontSize="small" />
                         </ListItemIcon>
