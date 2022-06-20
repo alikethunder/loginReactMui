@@ -8,26 +8,26 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import LoginButtons from './LoginButtons';
 
-export const AppTopBar = function() {
+export const AppTopBar = function () {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
-        <Toolbar variant="dense">
+        <Toolbar variant="dense" sx={{pr: 0}}>
 
           <IconButton
             size="large"
             edge="start"
             color="inherit"
             aria-label="menu"
-            sx={{ mr: 1 }}
-          >
+            sx={{ mr: 1 }} >
             <MenuIcon />
           </IconButton>
+
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Pizza parmezano
+            Pizza parmez
           </Typography>
 
-          <LoginButtons/>
+          <LoginButtons />
 
         </Toolbar>
       </AppBar>

@@ -59,7 +59,7 @@ export default function LoginButtons() {
                         Sign up
                     </MenuItem>
 
-                    <Divider />
+                    <Divider/>
 
                     <MenuItem>
                         <ListItemIcon>
