@@ -20,13 +20,17 @@ export default function SignIn() {
   const [showPassword, setShowPassword] = React.useState(false);
   const [emailIsValid, setEmailIsValid] = React.useState(true);
   const [emailFirstBlur, setEmailFirstBlur] = React.useState(true);
+  const [passwordFirstBlur, setPasswordFirstBlur] = React.useState(false);
+  const [email, setEmail] = React.useState('');
+  const [password, setPassword] = React.useState('');
 
-  const blur = (e) => {
+  const emailBlur = (e) => {
     setEmailFirstBlur(false);
     setEmailIsValid(!!e.target.value.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/));
   }
 
-  const validateEmail = (e) => {
+  const setAndValidateEmail = (e) => {
+    setEmail(e.target.value);
     if (!emailFirstBlur) {
       setEmailIsValid(!!e.target.value.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/));
     }
@@ -34,16 +38,17 @@ export default function SignIn() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    if (emailIsValid && data.get('email').length) {
+
+    setPasswordFirstBlur(true);
+    
+    if (emailIsValid && password.length) {
       console.log({
-        email: data.get('email'),
-        password: data.get('password'),
+        email,
+        password
       });
     }
     else {
-      setEmailIsValid(false);
-      console.log('email is invalid');
+      console.log('there are errors');
     }
   };
 
@@ -85,9 +90,9 @@ export default function SignIn() {
             autoComplete="email"
             autoFocus
 
-            onBlur={blur}
+            onBlur={emailBlur}
 
-            onChange={validateEmail}
+            onChange={setAndValidateEmail}
             error={!emailIsValid}
             helperText={!emailIsValid ? "Incorrect email" : ' '}
             sx={{ mb: 0 }}
@@ -101,6 +106,13 @@ export default function SignIn() {
             type={showPassword ? 'text' : 'password'}
             id="password"
             autoComplete="current-password"
+
+            onChange={(e)=>setPassword(e.target.value)}
+            onBlur={(e)=>setPasswordFirstBlur(true)}
+
+            error={!password.length && passwordFirstBlur}
+            helperText={(!password.length && passwordFirstBlur) ? "Password Required" : ' '}
+
             InputProps={{
               endAdornment:
                 <InputAdornment position="end" >
