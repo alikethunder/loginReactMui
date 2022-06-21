@@ -116,11 +116,13 @@ export default function SignUp() {
             label="Password"
             type={showPassword ? 'text' : 'password'}
             id="password"
-            onChange={(e)=>setPassword(e.target.value)}
+            onChange={(e)=>{setPassword(e.target.value);setPasswordsMatch(confirmPassword == e.target.value);}}
             onBlur={(e)=>setPasswordFirstBlur(true)}
 
             error={!password.length && passwordFirstBlur}
             helperText={(!password.length && passwordFirstBlur) ? "Password Required" : ' '}
+
+            sx={{ mb: 0 }}
 
             InputProps={{
               endAdornment:
@@ -148,6 +150,8 @@ export default function SignUp() {
             onChange={setAndValidateConfirmPassword}
             error={!passwordsMatch}
             helperText={!passwordsMatch ? "Passwords do not match" : ' '}
+
+            sx={{ mb: 0 }}
 
             InputProps={{
               endAdornment:
