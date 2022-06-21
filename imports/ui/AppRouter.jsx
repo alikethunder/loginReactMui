@@ -11,6 +11,7 @@ import { AppTopBar} from './AppTopBar';
 import SignIn from './routes/AccountsForms/SignIn';
 import SignUp from './routes/AccountsForms/SignUp';
 import ForgotPassword from './routes/AccountsForms/ForgotPassword';
+import HomePage from './routes/HomePage';
 
 
 export const AppRouter = () => (
@@ -26,6 +27,8 @@ export const AppRouter = () => (
       <Route path="signup" element={<SignUp/>} />
 
       <Route path="forgot_password" element={<ForgotPassword/>} />
+
+      <Route path="/" element={<HomePage/>} />
 
     </Routes>
 

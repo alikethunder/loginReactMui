@@ -1,4 +1,6 @@
 import * as React from 'react';
+import { useNavigate } from "react-router-dom";
+
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
@@ -15,7 +17,11 @@ import InputAdornment from '@mui/material/InputAdornment';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
+import { Accounts } from 'meteor/accounts-base';
+
 export default function SignUp() {
+
+  let navigate = useNavigate();
 
   const [showPassword, setShowPassword] = React.useState(false);
   const [emailIsValid, setEmailIsValid] = React.useState(true);
@@ -51,10 +57,24 @@ export default function SignUp() {
     setPasswordsMatch(password.length && password == confirmPassword);
     
     if (emailIsValid && password.length && passwordsMatch){
+
       console.log({
         email,
         password,
         confirmPassword
+      });
+
+      Accounts.createUser({
+        email,
+        password
+      }, (e)=>{
+        if (e) {
+          console.log('sign up error ', e);
+          return
+        }
+        console.log('sign up success ');
+        Meteor.call('email.sendVerification');
+        navigate("/");
       });
     } else {
         console.log('there are errors');
@@ -178,7 +198,7 @@ export default function SignUp() {
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
           >
-            Sign In
+            Sign Up
           </Button>
           <Grid container>
             <Grid item xs>
