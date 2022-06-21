@@ -6,33 +6,72 @@ import {
   Link
 } from "react-router-dom";
 import CssBaseline from '@mui/material/CssBaseline';
-import { AppTopBar} from './AppTopBar';
+import { AppTopBar } from './AppTopBar';
+import IconButton from '@mui/material/IconButton';
+import CancelIcon from '@mui/icons-material/Cancel';
+import PriorityHighIcon from '@mui/icons-material/PriorityHigh';
 
 import SignIn from './routes/AccountsForms/SignIn';
 import SignUp from './routes/AccountsForms/SignUp';
 import ForgotPassword from './routes/AccountsForms/ForgotPassword';
 import HomePage from './routes/HomePage';
 
+import { SnackbarProvider } from 'notistack';
+import Slide from '@mui/material/Slide';
+
+// add action to all snackbars
+const notistackRef = React.createRef();
+const onClickDismiss = key => () => { 
+  notistackRef.current.closeSnackbar(key);
+}
 
 export const AppRouter = () => (
-  <BrowserRouter>
+  <SnackbarProvider maxSnack={3}
 
-    <CssBaseline/>
-    <AppTopBar/>
-    
-    <Routes>
+    anchorOrigin={{
+      vertical: 'top',
+      horizontal: 'center',
+    }}
 
-      <Route path="signin" element={<SignIn/>} />
+    TransitionComponent={Slide}
 
-      <Route path="signup" element={<SignUp/>} />
+    ref={notistackRef}
 
-      <Route path="forgot_password" element={<ForgotPassword/>} />
+    action={(key) => (
+        <IconButton onClick={onClickDismiss(key)}
+        size="large"
+        edge="start"
+        color="inherit"
+        aria-label="menu"
+        sx={{ mr: 1 }} 
+        >
+        <CancelIcon />
+      </IconButton>
+    )}
 
-      <Route path="/" element={<HomePage/>} />
+    iconVariant={{
+      error: <PriorityHighIcon/>
+  }}
+  >
+    <BrowserRouter>
 
-    </Routes>
+      <CssBaseline />
+      <AppTopBar />
+
+      <Routes>
+
+        <Route path="signin" element={<SignIn />} />
+
+        <Route path="signup" element={<SignUp />} />
+
+        <Route path="forgot_password" element={<ForgotPassword />} />
+
+        <Route path="/" element={<HomePage />} />
+
+      </Routes>
 
 
 
-  </BrowserRouter>
+    </BrowserRouter>
+  </SnackbarProvider >
 );

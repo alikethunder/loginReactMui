@@ -17,10 +17,14 @@ import InputAdornment from '@mui/material/InputAdornment';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
+import { SnackbarProvider, useSnackbar } from 'notistack';
+
 import { Accounts } from 'meteor/accounts-base';
 
 export default function SignUp() {
 
+  const { enqueueSnackbar } = useSnackbar();
+  
   let navigate = useNavigate();
 
   const [showPassword, setShowPassword] = React.useState(false);
@@ -70,14 +74,18 @@ export default function SignUp() {
       }, (e)=>{
         if (e) {
           console.log('sign up error ', e);
+          enqueueSnackbar(e.reason, {variant: 'error', preventDuplicate: true});
           return
         }
         console.log('sign up success ');
+        enqueueSnackbar('sign up success ', {variant: 'success', preventDuplicate: true});
         Meteor.call('email.sendVerification');
         navigate("/");
       });
     } else {
         console.log('there are errors');
+
+        enqueueSnackbar('Fill all fields properly, please', {variant: 'error', preventDuplicate: true});
     }
   };
 
