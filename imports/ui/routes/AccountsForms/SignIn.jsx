@@ -1,7 +1,6 @@
 import * as React from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
@@ -11,13 +10,10 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
 import IconButton from '@mui/material/IconButton';
 import InputAdornment from '@mui/material/InputAdornment';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-
-//const theme = createTheme();
 
 export default function SignIn() {
 
@@ -25,13 +21,13 @@ export default function SignIn() {
   const [emailIsValid, setEmailIsValid] = React.useState(true);
   const [emailFirstBlur, setEmailFirstBlur] = React.useState(true);
 
-  const blur = (e)=>{
+  const blur = (e) => {
     setEmailFirstBlur(false);
     setEmailIsValid(!!e.target.value.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/));
   }
 
-  const validateEmail = (e) =>{
-    if (!emailFirstBlur){
+  const validateEmail = (e) => {
+    if (!emailFirstBlur) {
       setEmailIsValid(!!e.target.value.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/));
     }
   }
@@ -39,7 +35,7 @@ export default function SignIn() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    if (emailIsValid && data.get('email').length){
+    if (emailIsValid && data.get('email').length) {
       console.log({
         email: data.get('email'),
         password: data.get('password'),
@@ -54,7 +50,7 @@ export default function SignIn() {
   const handleClickShowPassword = (event) => {
     setShowPassword(!showPassword);
     let e = event.target.closest('.MuiInputBase-root').querySelector('input');
-    setTimeout(function(){
+    setTimeout(function () {
       e.setSelectionRange(-1, -1);
     });
   };
@@ -94,7 +90,7 @@ export default function SignIn() {
             onChange={validateEmail}
             error={!emailIsValid}
             helperText={!emailIsValid ? "Incorrect email" : ' '}
-            sx={{mb:0}}
+            sx={{ mb: 0 }}
           />
 
           <TextField name="password"
@@ -118,7 +114,6 @@ export default function SignIn() {
                   </IconButton>
                 </InputAdornment>
             }}
-
           />
 
           <FormControlLabel
