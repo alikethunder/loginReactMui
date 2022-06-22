@@ -29,6 +29,7 @@ export default function SignIn() {
   const [emailIsValid, setEmailIsValid] = React.useState(true);
   const [emailFirstBlur, setEmailFirstBlur] = React.useState(true);
   const [passwordFirstBlur, setPasswordFirstBlur] = React.useState(false);
+  const [rememberUser, setRememberUser] = React.useState(true);
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
 
@@ -65,6 +66,8 @@ export default function SignIn() {
         console.log('sign in success ');
         closeSnackbar();
         enqueueSnackbar('sign in successfully ', {variant: 'success', preventDuplicate: true});
+        Meteor._localStorage.setItem('rememberUser', rememberUser);
+        sessionStorage.setItem('refresh', true);
         navigate("/");
       });
     }
@@ -154,7 +157,8 @@ export default function SignIn() {
           />
 
           <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
+            control={<Checkbox color="primary" checked={rememberUser} onChange={(e)=>setRememberUser(e.target.checked)}
+            inputProps={{ 'aria-label': 'controlled' }}/>}
             label="Remember me"
           />
           <Button

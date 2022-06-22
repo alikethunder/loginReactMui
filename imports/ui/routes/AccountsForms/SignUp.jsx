@@ -32,10 +32,10 @@ export default function SignUp() {
   const [emailFirstBlur, setEmailFirstBlur] = React.useState(true);
   const [passwordFirstBlur, setPasswordFirstBlur] = React.useState(false);
   const [passwordsMatch, setPasswordsMatch] = React.useState(true);
+  const [rememberUser, setRememberUser] = React.useState(true);
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [confirmPassword, setConfirmPassword] = React.useState('');
-
   
   const setAndValidateConfirmPassword = (e)=>{
     setConfirmPassword(e.target.value);
@@ -81,6 +81,8 @@ export default function SignUp() {
         closeSnackbar();
         enqueueSnackbar('sign up successfully ', {variant: 'success', preventDuplicate: true});
         Meteor.call('email.sendVerification');
+        Meteor._localStorage.setItem('rememberUser', rememberUser);
+        sessionStorage.setItem('refresh', true);
         navigate("/");
       });
     } else {
@@ -198,7 +200,8 @@ export default function SignUp() {
           />
 
           <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
+            control={<Checkbox checked={rememberUser} color="primary" onChange={(e)=>setRememberUser(e.target.checked)}
+            inputProps={{ 'aria-label': 'controlled' }}/>}
             label="Remember me"
           />
           <Button

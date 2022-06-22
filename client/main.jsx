@@ -9,11 +9,14 @@ import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 
 Meteor.startup(() => {
-   //console.log('one : ', localStorage.getItem('count'));
-   //localStorage.setItem('count', localStorage.getItem('count') ? parseInt(localStorage.getItem('count')) + 1 : 1);
-   //console.log('two : ', localStorage.getItem('count'));
-
+   //if page is not refreshed or it's not a new tab && remember me was not checked logout user
+   window.addEventListener('load', function(){
+      if (!sessionStorage.getItem('refresh') && Meteor._localStorage.getItem('rememberUser') === 'false'){
+         Meteor.logout();
+         localStorage.removeItem('Meteor.loginToken');
+      }
+   });
 
    const root = ReactDOM.createRoot(document.getElementById('react-target'));
-   root.render(<AppRouter/>)
+   root.render(<AppRouter />)
 });
