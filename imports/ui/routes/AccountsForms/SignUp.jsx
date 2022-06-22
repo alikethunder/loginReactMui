@@ -17,7 +17,7 @@ import InputAdornment from '@mui/material/InputAdornment';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
-import { SnackbarProvider, useSnackbar } from 'notistack';
+import { useSnackbar } from 'notistack';
 
 import { Accounts } from 'meteor/accounts-base';
 
@@ -79,7 +79,7 @@ export default function SignUp() {
         }
         console.log('sign up success ');
         closeSnackbar();
-        enqueueSnackbar('sign up success ', {variant: 'success', preventDuplicate: true});
+        enqueueSnackbar('sign up successfully ', {variant: 'success', preventDuplicate: true});
         Meteor.call('email.sendVerification');
         navigate("/");
       });

@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 
+import { useTracker } from 'meteor/react-meteor-data';
+
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
@@ -15,14 +17,33 @@ import AssignmentIcon from '@mui/icons-material/Assignment';
 import PasswordIcon from '@mui/icons-material/Password';
 import LoginIcon from '@mui/icons-material/Login';
 import LogoutIcon from '@mui/icons-material/Logout';
+import ForwardToInboxIcon from '@mui/icons-material/ForwardToInbox';
+
+import { useSnackbar } from 'notistack';
 
 export default function LoginButtons() {
+
+    const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+
+    const user = useTracker(() => Meteor.user());
+
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
 
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
     };
+
+    const logout = () => {
+        Meteor.logout((e) => {
+            if (e) {
+                enqueueSnackbar(e.reason, { variant: 'error', preventDuplicate: true });
+                return
+            }
+            enqueueSnackbar('logged out successfully ', { variant: 'success', preventDuplicate: true });
+        });
+    }
+
 
     const handleClose = () => {
         setAnchorEl(null);
@@ -31,7 +52,9 @@ export default function LoginButtons() {
     return (
         <React.Fragment>
             <Box>
-                <Button color="inherit" startIcon={<LoginIcon/>} component={RouterLink} to="/signin">Login</Button>
+                {user ? <Button color="inherit" startIcon={<LogoutIcon />} onClick={logout}>Logout</Button> :
+                    <Button color="inherit" startIcon={<LoginIcon />} component={RouterLink} to="/signin">Login</Button>}
+
                 <IconButton
                     aria-label="ArrowDropDownIcon"
                     size="large"
@@ -54,30 +77,38 @@ export default function LoginButtons() {
                 dense="true"
             >
                 <MenuList dense>
-                    <MenuItem component={RouterLink} to="/signup">
-                        <ListItemIcon>
-                            <AssignmentIcon fontSize="small" />
-                        </ListItemIcon>
-                        Sign up
-                    </MenuItem>
+                    {user ? '' :
+                        [
+                            <MenuItem key='1' component={RouterLink} to="/signup">
+                                <ListItemIcon>
+                                    <AssignmentIcon fontSize="small" />
+                                </ListItemIcon>
+                                Sign up
+                            </MenuItem>,
 
-                    <Divider/>
+                            <Divider key='2' />,
 
-                    <MenuItem component={RouterLink} to="/forgot_password">
-                        <ListItemIcon>
-                            <PasswordIcon fontSize="small" />
-                        </ListItemIcon>
-                        Forgot password
-                    </MenuItem>
+                            <MenuItem key='3' component={RouterLink} to="/forgot_password">
+                                <ListItemIcon>
+                                    <PasswordIcon fontSize="small" />
+                                </ListItemIcon>
+                                Forgot password
+                            </MenuItem>
+                        ]
+                    }
 
-                    <Divider />
-
-                    <MenuItem>
-                        <ListItemIcon>
-                            <LogoutIcon fontSize="small" />
-                        </ListItemIcon>
-                        Logout
-                    </MenuItem>
+                    {user && !user.emails[0].verified ?
+                        <MenuItem key='2'
+                        //onClick={sendVirificationEmail}
+                        >
+                            <ListItemIcon>
+                                <ForwardToInboxIcon fontSize="small" />
+                            </ListItemIcon>
+                            Send verification email
+                        </MenuItem>
+                        :
+                        ''
+                    }
                 </MenuList>
             </Menu>
         </React.Fragment>

@@ -12,6 +12,8 @@ Meteor.startup(() => {
    //console.log('one : ', localStorage.getItem('count'));
    //localStorage.setItem('count', localStorage.getItem('count') ? parseInt(localStorage.getItem('count')) + 1 : 1);
    //console.log('two : ', localStorage.getItem('count'));
+
+
    const root = ReactDOM.createRoot(document.getElementById('react-target'));
    root.render(<AppRouter/>)
 });

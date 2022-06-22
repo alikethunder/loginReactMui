@@ -14,7 +14,7 @@ import PriorityHighIcon from '@mui/icons-material/PriorityHigh';
 import SignIn from './routes/AccountsForms/SignIn';
 import SignUp from './routes/AccountsForms/SignUp';
 import ForgotPassword from './routes/AccountsForms/ForgotPassword';
-import HomePage from './routes/HomePage';
+import Home from './routes/SitePages/Home';
 
 import { SnackbarProvider } from 'notistack';
 import Slide from '@mui/material/Slide';
@@ -36,6 +36,8 @@ export const AppRouter = () => (
     TransitionComponent={Slide}
 
     ref={notistackRef}
+
+    autoHideDuration={2500}
 
     action={(key) => (
         <IconButton onClick={onClickDismiss(key)}
@@ -66,7 +68,7 @@ export const AppRouter = () => (
 
         <Route path="forgot_password" element={<ForgotPassword />} />
 
-        <Route path="/" element={<HomePage />} />
+        <Route path="/" element={<Home />} />
 
       </Routes>
 

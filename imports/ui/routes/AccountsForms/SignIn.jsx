@@ -1,4 +1,6 @@
 import * as React from 'react';
+import { useNavigate } from "react-router-dom";
+
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
@@ -15,7 +17,13 @@ import InputAdornment from '@mui/material/InputAdornment';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
+import { useSnackbar } from 'notistack';
+
 export default function SignIn() {
+
+  let navigate = useNavigate();
+
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
   const [showPassword, setShowPassword] = React.useState(false);
   const [emailIsValid, setEmailIsValid] = React.useState(true);
@@ -43,12 +51,27 @@ export default function SignIn() {
     
     if (emailIsValid && password.length) {
       console.log({
-        email,
-        password
+        email
+      }, password);
+      Meteor.loginWithPassword({
+        email
+      },
+      password, (e)=>{
+        if (e){
+          console.log('sign in error ', e);
+          enqueueSnackbar(e.reason, {variant: 'error', preventDuplicate: true});
+          return
+        }
+        console.log('sign in success ');
+        closeSnackbar();
+        enqueueSnackbar('sign in successfully ', {variant: 'success', preventDuplicate: true});
+        navigate("/");
       });
     }
     else {
       console.log('there are errors');
+
+      enqueueSnackbar('Fill all fields properly, please', {variant: 'error', preventDuplicate: true});
     }
   };
 
