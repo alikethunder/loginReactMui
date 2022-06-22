@@ -44,6 +44,7 @@ export default function LoginButtons() {
         });
     }
 
+    const sendVirificationEmail = ()=>Meteor.call('email.sendVerificationEmail');
 
     const handleClose = () => {
         setAnchorEl(null);
@@ -99,7 +100,7 @@ export default function LoginButtons() {
 
                     {user && !user.emails[0].verified ?
                         <MenuItem key='2'
-                        //onClick={sendVirificationEmail}
+                        onClick={sendVirificationEmail}
                         >
                             <ListItemIcon>
                                 <ForwardToInboxIcon fontSize="small" />
