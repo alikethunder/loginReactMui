@@ -23,7 +23,7 @@ import { Accounts } from 'meteor/accounts-base';
 
 export default function SignUp() {
 
-  const { enqueueSnackbar } = useSnackbar();
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   
   let navigate = useNavigate();
 
@@ -78,6 +78,7 @@ export default function SignUp() {
           return
         }
         console.log('sign up success ');
+        closeSnackbar();
         enqueueSnackbar('sign up success ', {variant: 'success', preventDuplicate: true});
         Meteor.call('email.sendVerification');
         navigate("/");
