@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link as RouterLink } from "react-router-dom";
 
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
@@ -65,7 +65,7 @@ export default function SignIn() {
         }
         console.log('sign in success ');
         closeSnackbar();
-        enqueueSnackbar('sign in successfully ', {variant: 'success', preventDuplicate: true});
+        enqueueSnackbar('Signed in successfully ', {variant: 'success', preventDuplicate: true});
         Meteor._localStorage.setItem('rememberUser', rememberUser);
         sessionStorage.setItem('refresh', true);
         navigate("/");
@@ -171,12 +171,12 @@ export default function SignIn() {
           </Button>
           <Grid container>
             <Grid item xs>
-              <Link href="#" variant="body2">
+              <Link component={RouterLink} to="/forgot_password" variant="body2">
                 Forgot password?
               </Link>
             </Grid>
             <Grid item>
-              <Link href="#" variant="body2">
+              <Link component={RouterLink} to="/signup" variant="body2">
                 {"Don't have an account? Sign Up"}
               </Link>
             </Grid>

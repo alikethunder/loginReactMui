@@ -40,11 +40,17 @@ export default function LoginButtons() {
                 enqueueSnackbar(e.reason, { variant: 'error', preventDuplicate: true });
                 return
             }
-            enqueueSnackbar('logged out successfully ', { variant: 'success', preventDuplicate: true });
+            enqueueSnackbar('Logged out successfully ', { variant: 'success', preventDuplicate: true });
         });
     }
 
-    const sendVirificationEmail = ()=>Meteor.call('email.sendVerificationEmail');
+    const sendVirificationEmail = ()=>Meteor.call('email.sendVerification', (e)=>{
+        if (e) {
+            console.log('error email.sendVerification ', e);
+            return
+        }
+        enqueueSnackbar('Sent email verification. Please check your mailbox', { variant: 'success', preventDuplicate: true });
+    });
 
     const handleClose = () => {
         setAnchorEl(null);
