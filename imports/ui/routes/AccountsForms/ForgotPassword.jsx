@@ -47,7 +47,7 @@ export default function ForgotPassword() {
                 }
                 if (r){
                     console.log('email.checkExistence method result ', r);
-                    enqueueSnackbar('There is no an account with such email', { variant: 'error', preventDuplicate: true });
+                    enqueueSnackbar('There is no account with such email', { variant: 'error', preventDuplicate: true });
                     return
                 }
                 Meteor.call('email.sendResetPassword', email, (e) => {
