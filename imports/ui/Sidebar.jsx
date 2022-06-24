@@ -5,7 +5,6 @@ import { useLocation } from 'react-router-dom';
 import { useTracker } from 'meteor/react-meteor-data';
 import { Session } from 'meteor/session';
 
-import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
 import Drawer from '@mui/material/Drawer';
@@ -17,13 +16,12 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import MailIcon from '@mui/icons-material/Mail';
 import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
 
 import LoginButtons from './LoginButtons';
 
-const drawerWidth = 240;
-
 function Sidebar(props) {
+
+    const drawerWidth = props.drawerWidth;
 
     Session.setDefault('sidebarMobileOpened', Meteor._localStorage.getItem('sidebarMobileOpened') === 'true');
     Session.setDefault('sidebarWideOpened', Meteor._localStorage.getItem('sidebarWideOpened') === 'true');

@@ -1,14 +1,21 @@
 import React from 'react';
+
+
+import { useTracker } from 'meteor/react-meteor-data';
+
 import {
   BrowserRouter,
   Routes,
   Route,
   Link
 } from "react-router-dom";
+
+import { useTheme } from '@mui/material/styles';
+
+import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
 import { AppTopBar } from './AppTopBar';
 import Sidebar from './Sidebar';
-import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import CancelIcon from '@mui/icons-material/Cancel';
@@ -28,59 +35,82 @@ const onClickDismiss = key => () => {
   notistackRef.current.closeSnackbar(key);
 }
 
-export const AppRouter = () => (
-  <SnackbarProvider maxSnack={3}
+const drawerWidth = 240;
 
-    anchorOrigin={{
-      vertical: 'top',
-      horizontal: 'center',
-    }}
+export default function AppRouter() {
+  const theme = useTheme();
 
-    TransitionComponent={Slide}
+  const wideOpen = useTracker(() => Session.get('sidebarWideOpened'));
 
-    ref={notistackRef}
+  return (
+    <SnackbarProvider maxSnack={3}
 
-    autoHideDuration={2500}
+      anchorOrigin={{
+        vertical: 'top',
+        horizontal: 'center',
+      }}
 
-    action={(key) => (
-      <IconButton onClick={onClickDismiss(key)}
-        size="large"
-        edge="start"
-        color="inherit"
-        aria-label="menu"
-        sx={{ mr: 1 }}
-      >
-        <CancelIcon />
-      </IconButton>
-    )}
+      TransitionComponent={Slide}
 
-    iconVariant={{
-      error: <PriorityHighIcon />
-    }}
-  >
-    <BrowserRouter>
+      ref={notistackRef}
 
-      <CssBaseline />
-      <AppTopBar />
-      <Sidebar />
-      <Box component="main" sx={{ flexGrow: 1, p: 3 }} >
+      autoHideDuration={2500}
 
-        <Toolbar variant="dense"/>
+      action={(key) => (
+        <IconButton onClick={onClickDismiss(key)}
+          size="large"
+          edge="start"
+          color="inherit"
+          aria-label="menu"
+          sx={{ mr: 1 }}
+        >
+          <CancelIcon />
+        </IconButton>
+      )}
 
-        <Routes>
+      iconVariant={{
+        error: <PriorityHighIcon />
+      }}
+    >
+      <BrowserRouter>
 
-          <Route path="signin" element={<SignIn />} />
+        <CssBaseline />
+        <AppTopBar />
+        <Sidebar drawerWidth={240} />
 
-          <Route path="signup" element={<SignUp />} />
+        
+        <Box component="main" sx={{ 
+          flexGrow: {sm: 1},
+          //padding: {sm: theme.spacing(3)},
+          transition: {sm: theme.transitions.create('margin', {
+            easing: theme.transitions.easing.sharp,
+            duration: theme.transitions.duration.leavingScreen,
+          })},
+          marginLeft: {sm: 0},
+          ...(wideOpen && {
+            transition: {sm: theme.transitions.create('margin', {
+              easing: theme.transitions.easing.easeOut,
+              duration: theme.transitions.duration.enteringScreen,
+            })},
+            marginLeft: {sm: `${drawerWidth}px`},
+          })
+          }} >
+          <Toolbar variant="dense" />
 
-          <Route path="forgot_password" element={<ForgotPassword />} />
+          <Routes>
 
-          <Route path="/" element={<Home />} />
+            <Route path="signin" element={<SignIn />} />
 
-        </Routes>
+            <Route path="signup" element={<SignUp />} />
 
-      </Box>
+            <Route path="forgot_password" element={<ForgotPassword />} />
 
-    </BrowserRouter>
-  </SnackbarProvider >
-);
+            <Route path="/" element={<Home />} />
+
+          </Routes>
+        </Box>
+
+      </BrowserRouter>
+    </SnackbarProvider >
+  )
+};
