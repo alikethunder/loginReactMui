@@ -1,5 +1,7 @@
 import * as React from 'react';
 
+import { useLocation } from 'react-router-dom';
+
 import { useTracker } from 'meteor/react-meteor-data';
 import { Session } from 'meteor/session';
 
@@ -27,6 +29,16 @@ function Sidebar(props) {
     Session.setDefault('sidebarWideOpened', Meteor._localStorage.getItem('sidebarWideOpened') === 'true');
 
     const { window } = props;
+
+    const closeMobileSidebar = () => {
+        Meteor._localStorage.setItem('sidebarMobileOpened', false);
+        Session.set('sidebarMobileOpened', false);
+    }
+
+    const location = useLocation();
+    React.useEffect(() => {
+        closeMobileSidebar()
+    }, [location])
 
     const toggleMobileSidebarOpened = () => {
         let mobileState = Session.get('sidebarMobileOpened');
@@ -66,7 +78,7 @@ function Sidebar(props) {
                         </ListItemButton>
                     </ListItem>
                 ))}
-                <ListItem disablePadding sx={{pl: 2, justifyContent: 'stretch'}}>
+                <ListItem disablePadding>
                     <LoginButtons inSidebar={true} />
                 </ListItem>
             </List>
