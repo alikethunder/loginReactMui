@@ -10,8 +10,8 @@ import '@fontsource/roboto/700.css';
 
 Meteor.startup(() => {
    //if page is not refreshed or it's not a new tab && remember me was not checked logout user
-   window.addEventListener('load', function(){
-      if (!sessionStorage.getItem('refresh') && Meteor._localStorage.getItem('rememberUser') === 'false'){
+   window.addEventListener('load', function () {
+      if (!sessionStorage.getItem('refresh') && Meteor._localStorage.getItem('rememberUser') === 'false') {
          Meteor.logout();
          localStorage.removeItem('Meteor.loginToken');
       }

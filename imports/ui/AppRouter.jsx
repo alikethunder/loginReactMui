@@ -78,23 +78,27 @@ export default function AppRouter() {
         <AppTopBar />
         <Sidebar drawerWidth={240} />
 
-        
-        <Box component="main" sx={{ 
-          flexGrow: {sm: 1},
+
+        <Box component="main" sx={{
+          flexGrow: { sm: 1 },
           //padding: {sm: theme.spacing(3)},
-          transition: {sm: theme.transitions.create('margin', {
-            easing: theme.transitions.easing.sharp,
-            duration: theme.transitions.duration.leavingScreen,
-          })},
-          marginLeft: {sm: 0},
+          transition: {
+            sm: theme.transitions.create('margin', {
+              easing: theme.transitions.easing.sharp,
+              duration: theme.transitions.duration.leavingScreen,
+            })
+          },
+          marginLeft: { sm: 0 },
           ...(wideOpen && {
-            transition: {sm: theme.transitions.create('margin', {
-              easing: theme.transitions.easing.easeOut,
-              duration: theme.transitions.duration.enteringScreen,
-            })},
-            marginLeft: {sm: `${drawerWidth}px`},
+            transition: {
+              sm: theme.transitions.create('margin', {
+                easing: theme.transitions.easing.easeOut,
+                duration: theme.transitions.duration.enteringScreen,
+              })
+            },
+            marginLeft: { sm: `${drawerWidth}px` },
           })
-          }} >
+        }} >
           <Toolbar variant="dense" />
 
           <Routes>

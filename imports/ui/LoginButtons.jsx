@@ -59,39 +59,39 @@ export default function LoginButtons(props) {
 
     return (
         <React.Fragment>
-            
-                {props.inSidebar ?
-                    user ?
-                        <ListItemButton color="inherit" onClick={logout}>
-                            <ListItemIcon>
-                                <LogoutIcon />
-                            </ListItemIcon>
-                            <ListItemText primary='Logout' />
-                        </ListItemButton>
-                        :
-                        <ListItemButton color="inherit" component={RouterLink} to="/signin">
-                            <ListItemIcon>
-                                <LoginIcon />
-                            </ListItemIcon>
-                            <ListItemText primary='Login' />
-                        </ListItemButton>
+
+            {props.inSidebar ?
+                user ?
+                    <ListItemButton color="inherit" onClick={logout}>
+                        <ListItemIcon>
+                            <LogoutIcon />
+                        </ListItemIcon>
+                        <ListItemText primary='Logout' />
+                    </ListItemButton>
                     :
-                    user ? <Button color="inherit" startIcon={<LogoutIcon />} onClick={logout}>Logout</Button> :
-                        <Button color="inherit" startIcon={<LoginIcon />} component={RouterLink} to="/signin">Login</Button>}
+                    <ListItemButton color="inherit" component={RouterLink} to="/signin">
+                        <ListItemIcon>
+                            <LoginIcon />
+                        </ListItemIcon>
+                        <ListItemText primary='Login' />
+                    </ListItemButton>
+                :
+                user ? <Button color="inherit" startIcon={<LogoutIcon />} onClick={logout}>Logout</Button> :
+                    <Button color="inherit" startIcon={<LoginIcon />} component={RouterLink} to="/signin">Login</Button>}
 
-                <IconButton
-                    aria-label="ArrowDropDownIcon"
-                    size="large"
-                    color="inherit"
+            <IconButton
+                aria-label="ArrowDropDownIcon"
+                size="large"
+                color="inherit"
 
-                    onClick={handleClick}
-                    aria-controls={open ? 'account-menu' : undefined}
-                    aria-haspopup="true"
-                    aria-expanded={open ? 'true' : undefined}
-                >
-                    <ArrowDropDownIcon fontSize="inherit" />
-                </IconButton>
-            
+                onClick={handleClick}
+                aria-controls={open ? 'account-menu' : undefined}
+                aria-haspopup="true"
+                aria-expanded={open ? 'true' : undefined}
+            >
+                <ArrowDropDownIcon fontSize="inherit" />
+            </IconButton>
+
             <Menu
                 anchorEl={anchorEl}
                 id="account-menu"
