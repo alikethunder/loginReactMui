@@ -17,16 +17,18 @@ import MailIcon from '@mui/icons-material/Mail';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 
+import LoginButtons from './LoginButtons';
+
 const drawerWidth = 240;
 
 function Sidebar(props) {
 
-    Session.setDefault('sidebarMobileOpened', Meteor._localStorage.getItem('sidebarMobileOpened') || false);
-    Session.setDefault('sidebarWideOpened', Meteor._localStorage.getItem('sidebarWideOpened') || true);
+    Session.setDefault('sidebarMobileOpened', Meteor._localStorage.getItem('sidebarMobileOpened') === 'true');
+    Session.setDefault('sidebarWideOpened', Meteor._localStorage.getItem('sidebarWideOpened') === 'true');
 
     const { window } = props;
 
-    const toggleMobileSidebarOpened = ()=>{
+    const toggleMobileSidebarOpened = () => {
         let mobileState = Session.get('sidebarMobileOpened');
         Meteor._localStorage.setItem('sidebarMobileOpened', !mobileState);
         Session.set('sidebarMobileOpened', !mobileState);
@@ -64,6 +66,9 @@ function Sidebar(props) {
                         </ListItemButton>
                     </ListItem>
                 ))}
+                <ListItem disablePadding sx={{pl: 2, justifyContent: 'stretch'}}>
+                    <LoginButtons inSidebar={true} />
+                </ListItem>
             </List>
         </div>
     );

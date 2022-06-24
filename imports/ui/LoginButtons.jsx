@@ -10,7 +10,9 @@ import Menu from '@mui/material/Menu';
 import MenuList from '@mui/material/MenuList';
 import MenuItem from '@mui/material/MenuItem';
 import Divider from '@mui/material/Divider';
+import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
 
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import AssignmentIcon from '@mui/icons-material/Assignment';
@@ -21,8 +23,7 @@ import ForwardToInboxIcon from '@mui/icons-material/ForwardToInbox';
 
 import { useSnackbar } from 'notistack';
 
-export default function LoginButtons() {
-
+export default function LoginButtons(props) {
     const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
     const user = useTracker(() => Meteor.user());
@@ -44,7 +45,7 @@ export default function LoginButtons() {
         });
     }
 
-    const sendVirificationEmail = ()=>Meteor.call('email.sendVerification', (e)=>{
+    const sendVirificationEmail = () => Meteor.call('email.sendVerification', (e) => {
         if (e) {
             console.log('error email.sendVerification ', e);
             return
@@ -58,9 +59,25 @@ export default function LoginButtons() {
 
     return (
         <React.Fragment>
-            <Box>
-                {user ? <Button color="inherit" startIcon={<LogoutIcon />} onClick={logout}>Logout</Button> :
-                    <Button color="inherit" startIcon={<LoginIcon />} component={RouterLink} to="/signin">Login</Button>}
+            
+                {props.inSidebar ?
+                    user ?
+                        <ListItemButton color="inherit" onClick={logout}>
+                            <ListItemIcon>
+                                <LogoutIcon />
+                            </ListItemIcon>
+                            <ListItemText primary='Logout' />
+                        </ListItemButton>
+                        :
+                        <ListItemButton color="inherit" component={RouterLink} to="/signin">
+                            <ListItemIcon>
+                                <LoginIcon />
+                            </ListItemIcon>
+                            <ListItemText primary='Login' />
+                        </ListItemButton>
+                    :
+                    user ? <Button color="inherit" startIcon={<LogoutIcon />} onClick={logout}>Logout</Button> :
+                        <Button color="inherit" startIcon={<LoginIcon />} component={RouterLink} to="/signin">Login</Button>}
 
                 <IconButton
                     aria-label="ArrowDropDownIcon"
@@ -74,7 +91,7 @@ export default function LoginButtons() {
                 >
                     <ArrowDropDownIcon fontSize="inherit" />
                 </IconButton>
-            </Box>
+            
             <Menu
                 anchorEl={anchorEl}
                 id="account-menu"
@@ -106,7 +123,7 @@ export default function LoginButtons() {
 
                     {user && !user.emails[0].verified ?
                         <MenuItem key='2'
-                        onClick={sendVirificationEmail}
+                            onClick={sendVirificationEmail}
                         >
                             <ListItemIcon>
                                 <ForwardToInboxIcon fontSize="small" />
