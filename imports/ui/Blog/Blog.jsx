@@ -9,12 +9,12 @@ import GitHubIcon from '@mui/icons-material/GitHub';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import Box from '@mui/material/Box';
 
 import Header from './Header';
 import MainFeaturedPost from './MainFeaturedPost';
 import FeaturedPost from './FeaturedPost';
 import Main from './Main';
-import Sidebar from './Sidebar';
 import Footer from './Footer';
 import { PostsCollection } from '/imports/db/posts';
 
@@ -93,10 +93,9 @@ export default function Blog() {
 
   return (
     <ThemeProvider theme={theme}>
-      <CssBaseline />
       <Container maxWidth="lg">
         <Header title="Blog" sections={sections} />
-        <main>
+        <Box>
           <MainFeaturedPost post={mainFeaturedPost} />
           <Grid container spacing={4}>
             {featuredPosts.map((post) => (
@@ -106,7 +105,7 @@ export default function Blog() {
           <Grid container spacing={5} sx={{ mt: 3 }}>
             <Main title="From the firehose" posts={posts} />
           </Grid>
-        </main>
+        </Box>
       </Container>
       <Footer
         title="Footer"
