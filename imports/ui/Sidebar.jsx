@@ -19,6 +19,7 @@ import InfoIcon from '@mui/icons-material/Info';
 import Toolbar from '@mui/material/Toolbar';
 
 import LoginButtons from './LoginButtons';
+import ActiveLink from './ActiveLink';
 
 function Sidebar(props) {
 
@@ -53,26 +54,16 @@ function Sidebar(props) {
         <div>
             <Toolbar variant="dense" />
             <Divider />
-            <List>
+            <List sx={{py:0}}>
                 <ListItem disablePadding >
-                    <ListItemButton component={RouterLink} to="/">
-                        <ListItemIcon>
-                            <HomeIcon />
-                        </ListItemIcon>
-                        <ListItemText>Home</ListItemText>
-                    </ListItemButton>
+                    <ActiveLink to="/" label="Home" icon={<HomeIcon />} />
                 </ListItem>
                 <ListItem disablePadding>
-                    <ListItemButton component={RouterLink} to="/dashboard">
-                        <ListItemIcon>
-                            <InfoIcon />
-                        </ListItemIcon>
-                        <ListItemText>Dashboard</ListItemText>
-                    </ListItemButton>
+                    <ActiveLink to="/dashboard" label="Dashboard" icon={<InfoIcon />} />
                 </ListItem>
             </List>
             <Divider />
-            <List>
+            <List sx={{py:0}}>
                 <ListItem disablePadding>
                     <LoginButtons inSidebar={true} />
                 </ListItem>
