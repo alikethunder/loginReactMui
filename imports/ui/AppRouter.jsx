@@ -25,6 +25,7 @@ import SignUp from './routes/AccountsForms/SignUp';
 import ForgotPassword from './routes/AccountsForms/ForgotPassword';
 import Home from './routes/Home';
 import Info from './routes/Info';
+import Content from './Content';
 
 import { SnackbarProvider } from 'notistack';
 import Slide from '@mui/material/Slide';
@@ -78,43 +79,7 @@ export default function AppRouter() {
         <AppTopBar />
         <Sidebar drawerWidth={240} />
 
-
-        <Box component="main" sx={{
-          flexGrow: { sm: 1 },
-          padding: {sm: theme.spacing(3)},
-          transition: {
-            sm: theme.transitions.create('margin', {
-              easing: theme.transitions.easing.sharp,
-              duration: theme.transitions.duration.leavingScreen,
-            })
-          },
-          marginLeft: { sm: 0 },
-          ...(wideOpen && {
-            transition: {
-              sm: theme.transitions.create('margin', {
-                easing: theme.transitions.easing.easeOut,
-                duration: theme.transitions.duration.enteringScreen,
-              })
-            },
-            marginLeft: { sm: `${drawerWidth}px` },
-          })
-        }}>
-          <Toolbar variant="dense" />
-
-          <Routes>
-
-            <Route path="signin" element={<SignIn />} />
-
-            <Route path="signup" element={<SignUp />} />
-
-            <Route path="forgot_password" element={<ForgotPassword />} />
-            
-            <Route path="/dashboard" element={<Info />} />
-
-            <Route path="/" element={<Home />} />
-
-          </Routes>
-        </Box>
+        <Content drawerWidth={240} />
 
       </BrowserRouter>
     </SnackbarProvider >
