@@ -24,6 +24,7 @@ import SignIn from './routes/AccountsForms/SignIn';
 import SignUp from './routes/AccountsForms/SignUp';
 import ForgotPassword from './routes/AccountsForms/ForgotPassword';
 import Home from './routes/Home';
+import Info from './routes/Info';
 
 import { SnackbarProvider } from 'notistack';
 import Slide from '@mui/material/Slide';
@@ -80,7 +81,7 @@ export default function AppRouter() {
 
         <Box component="main" sx={{
           flexGrow: { sm: 1 },
-          //padding: {sm: theme.spacing(3)},
+          padding: {sm: theme.spacing(3)},
           transition: {
             sm: theme.transitions.create('margin', {
               easing: theme.transitions.easing.sharp,
@@ -107,6 +108,8 @@ export default function AppRouter() {
             <Route path="signup" element={<SignUp />} />
 
             <Route path="forgot_password" element={<ForgotPassword />} />
+            
+            <Route path="/dashboard" element={<Info />} />
 
             <Route path="/" element={<Home />} />
 
