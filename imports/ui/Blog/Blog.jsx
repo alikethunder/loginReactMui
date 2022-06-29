@@ -14,7 +14,7 @@ import Box from '@mui/material/Box';
 import Header from './Header';
 import MainFeaturedPost from './MainFeaturedPost';
 import FeaturedPost from './FeaturedPost';
-import Main from './Main';
+import Main1 from './Main';
 import Footer from './Footer';
 import { PostsCollection } from '/imports/db/posts';
 
@@ -103,7 +103,7 @@ export default function Blog() {
             ))}
           </Grid>
           <Grid container spacing={5} sx={{ mt: 3 }}>
-            <Main title="From the firehose" posts={posts} />
+            <Main1 title="From the firehose" posts={posts} />
           </Grid>
         </Box>
       </Container>

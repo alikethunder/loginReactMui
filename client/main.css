@@ -2,3 +2,18 @@
 @import '@fontsource/roboto/400.css';
 @import '@fontsource/roboto/500.css';
 @import '@fontsource/roboto/700.css';
+
+/*start: remove flickering on mobile when sidebar opens*/
+body {
+    padding: 0 !important;
+    overflow: visible !important;
+}
+
+main {
+    padding: 0 !important;
+}
+
+header {
+    padding: 0 !important;
+}
+/*end: remove flickering on mobile when sidebar opens*/

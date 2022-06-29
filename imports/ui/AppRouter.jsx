@@ -97,7 +97,7 @@ export default function AppRouter() {
             },
             marginLeft: { sm: `${drawerWidth}px` },
           })
-        }} >
+        }}>
           <Toolbar variant="dense" />
 
           <Routes>

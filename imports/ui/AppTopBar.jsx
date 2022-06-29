@@ -29,7 +29,7 @@ export const AppTopBar = function () {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="fixed" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>
+      <AppBar position="fixed" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1, width: '100vw', left: '0'}}>
         <Toolbar variant="dense" sx={{ pr: 0 }}>
 
           <IconButton
@@ -37,8 +37,7 @@ export const AppTopBar = function () {
             edge="start"
             color="inherit"
             aria-label="menu"
-            onClick={toggleSidebarOpened}
-            sx={{ mr: 1 }} >
+            onClick={toggleSidebarOpened} >
             <MenuIcon />
           </IconButton>
 
