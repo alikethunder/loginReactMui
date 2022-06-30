@@ -28,13 +28,15 @@ import { useSnackbar } from 'notistack';
 
 export default function LoginButtons(props) {
 
+    const [anchorEl, setAnchorEl] = React.useState(null);
+    
     const theme = useTheme();
 
     const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
     const user = useTracker(() => Meteor.user());
 
-    const [anchorEl, setAnchorEl] = React.useState(null);
+    
     const open = Boolean(anchorEl);
 
     const handleClick = (event) => {

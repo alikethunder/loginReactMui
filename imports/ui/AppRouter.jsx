@@ -3,28 +3,18 @@ import React from 'react';
 import { useTracker } from 'meteor/react-meteor-data';
 
 import {
-  BrowserRouter,
-  Routes,
-  Route,
-  Link
+  BrowserRouter
 } from "react-router-dom";
 
 import { useTheme } from '@mui/material/styles';
 
-import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
 import { AppTopBar } from './AppTopBar';
 import Sidebar from './Sidebar';
-import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import CancelIcon from '@mui/icons-material/Cancel';
 import PriorityHighIcon from '@mui/icons-material/PriorityHigh';
 
-import SignIn from './routes/AccountsForms/SignIn';
-import SignUp from './routes/AccountsForms/SignUp';
-import ForgotPassword from './routes/AccountsForms/ForgotPassword';
-import Home from './routes/Home';
-import Info from './routes/Info';
 import Content from './Content';
 
 import { SnackbarProvider } from 'notistack';
@@ -39,9 +29,6 @@ const onClickDismiss = key => () => {
 const drawerWidth = 240;
 
 export default function AppRouter() {
-  const theme = useTheme();
-
-  const wideOpen = useTracker(() => Session.get('sidebarWideOpened'));
 
   return (
     <SnackbarProvider maxSnack={3}
@@ -77,9 +64,9 @@ export default function AppRouter() {
 
         <CssBaseline />
         <AppTopBar />
-        <Sidebar drawerWidth={240} />
+        <Sidebar drawerWidth={drawerWidth} />
 
-        <Content drawerWidth={240} />
+        <Content drawerWidth={drawerWidth} />
 
       </BrowserRouter>
     </SnackbarProvider >

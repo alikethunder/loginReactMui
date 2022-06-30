@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React from 'react';
 
 import { useTracker } from 'meteor/react-meteor-data';
 
@@ -25,10 +25,10 @@ export default function Content(props) {
 
     //page transitions
     const location = useLocation();
-    const [displayLocation, setDisplayLocation] = useState(location);
-    const [transitionStage, setTransistionStage] = useState("fadeIn");
+    const [displayLocation, setDisplayLocation] = React.useState(location);
+    const [transitionStage, setTransistionStage] = React.useState("fadeIn");
 
-    useEffect(() => {
+    React.useEffect(() => {
         if (location !== displayLocation) setTransistionStage("fadeOut");
     }, [location]);
 

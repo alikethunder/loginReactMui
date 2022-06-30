@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { Link as RouterLink } from 'react-router-dom';
 
 import { useLocation } from 'react-router-dom';
 
@@ -11,9 +10,6 @@ import Divider from '@mui/material/Divider';
 import Drawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
 import HomeIcon from '@mui/icons-material/Home';
 import InfoIcon from '@mui/icons-material/Info';
 import Toolbar from '@mui/material/Toolbar';
@@ -35,11 +31,11 @@ function Sidebar(props) {
         Meteor._localStorage.setItem('sidebarMobileOpened', false);
         Session.set('sidebarMobileOpened', false);
     }
-
+    //close mobile sidebar on page change
     const location = useLocation();
     React.useEffect(() => {
         closeMobileSidebar()
-    }, [location])
+    }, [location]);
 
     const toggleMobileSidebarOpened = () => {
         let mobileState = Session.get('sidebarMobileOpened');

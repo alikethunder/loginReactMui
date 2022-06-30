@@ -24,7 +24,7 @@ import { Accounts } from 'meteor/accounts-base';
 export default function SignUp() {
 
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
-  
+
   let navigate = useNavigate();
 
   const [showPassword, setShowPassword] = React.useState(false);
@@ -36,20 +36,20 @@ export default function SignUp() {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [confirmPassword, setConfirmPassword] = React.useState('');
-  
-  const setAndValidateConfirmPassword = (e)=>{
+
+  const setAndValidateConfirmPassword = (e) => {
     setConfirmPassword(e.target.value);
     setPasswordsMatch(password == e.target.value);
   }
 
-  const emailBlur = (e)=>{
+  const emailBlur = (e) => {
     setEmailFirstBlur(false);
     setEmailIsValid(!!e.target.value.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/));
   }
 
-  const setAndValidateEmail = (e) =>{
+  const setAndValidateEmail = (e) => {
     setEmail(e.target.value);
-    if (!emailFirstBlur){
+    if (!emailFirstBlur) {
       setEmailIsValid(!!e.target.value.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/));
     }
   }
@@ -59,8 +59,8 @@ export default function SignUp() {
 
     setPasswordFirstBlur(true);
     setPasswordsMatch(password.length && password == confirmPassword);
-    
-    if (emailIsValid && password.length && passwordsMatch){
+
+    if (emailIsValid && password.length && passwordsMatch) {
 
       console.log({
         email,
@@ -71,24 +71,24 @@ export default function SignUp() {
       Accounts.createUser({
         email,
         password
-      }, (e)=>{
+      }, (e) => {
         if (e) {
           console.log('sign up error ', e);
-          enqueueSnackbar(e.reason, {variant: 'error', preventDuplicate: true});
+          enqueueSnackbar(e.reason, { variant: 'error', preventDuplicate: true });
           return
         }
         console.log('sign up success ');
         closeSnackbar();
-        enqueueSnackbar('Signed up successfully ', {variant: 'success', preventDuplicate: true});
+        enqueueSnackbar('Signed up successfully ', { variant: 'success', preventDuplicate: true });
         Meteor.call('email.sendVerification');
         Meteor._localStorage.setItem('rememberUser', rememberUser);
         sessionStorage.setItem('refresh', true);
         navigate("/");
       });
     } else {
-        console.log('there are errors');
+      console.log('there are errors');
 
-        enqueueSnackbar('Fill all fields properly, please', {variant: 'error', preventDuplicate: true});
+      enqueueSnackbar('Fill all fields properly, please', { variant: 'error', preventDuplicate: true });
     }
   };
 
@@ -96,7 +96,7 @@ export default function SignUp() {
     setShowPassword(!showPassword);
     let e = event.target.closest('.MuiInputBase-root').querySelector('input');
     e.focus();
-    setTimeout(function(){
+    setTimeout(function () {
       e.setSelectionRange(-1, -1);
     });
   };
@@ -137,7 +137,7 @@ export default function SignUp() {
 
             error={!emailIsValid}
             helperText={!emailIsValid ? "Incorrect email" : ' '}
-            sx={{mb:0}}
+            sx={{ mb: 0 }}
           />
 
           <TextField name="password"
@@ -147,8 +147,8 @@ export default function SignUp() {
             label="Password"
             type={showPassword ? 'text' : 'password'}
             id="password"
-            onChange={(e)=>{setPassword(e.target.value);setPasswordsMatch(confirmPassword == e.target.value);}}
-            onBlur={(e)=>setPasswordFirstBlur(true)}
+            onChange={(e) => { setPassword(e.target.value); setPasswordsMatch(confirmPassword == e.target.value); }}
+            onBlur={(e) => setPasswordFirstBlur(true)}
 
             error={!password.length && passwordFirstBlur}
             helperText={(!password.length && passwordFirstBlur) ? "Password Required" : ' '}
@@ -200,8 +200,8 @@ export default function SignUp() {
           />
 
           <FormControlLabel
-            control={<Checkbox checked={rememberUser} color="primary" onChange={(e)=>setRememberUser(e.target.checked)}
-            inputProps={{ 'aria-label': 'controlled' }}/>}
+            control={<Checkbox checked={rememberUser} color="primary" onChange={(e) => setRememberUser(e.target.checked)}
+              inputProps={{ 'aria-label': 'controlled' }} />}
             label="Remember me"
           />
           <Button
