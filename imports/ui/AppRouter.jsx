@@ -1,12 +1,8 @@
 import React from 'react';
 
-import { useTracker } from 'meteor/react-meteor-data';
-
 import {
   BrowserRouter
 } from "react-router-dom";
-
-import { useTheme } from '@mui/material/styles';
 
 import CssBaseline from '@mui/material/CssBaseline';
 import { AppTopBar } from './AppTopBar';
@@ -45,7 +41,7 @@ export default function AppRouter() {
       autoHideDuration={2500}
 
       action={(key) => (
-        <IconButton onClick={() => closeSnackbar(key)}
+        <IconButton onClick={onClickDismiss(key)}
           size="large"
           edge="start"
           color="inherit"
