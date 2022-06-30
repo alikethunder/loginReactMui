@@ -28,7 +28,5 @@
     },
     "testModule": "tests/main.js"
   },
-  "devDependencies": {
-    "markdown-to-jsx": "^7.1.7"
-  }
+  "devDependencies": {}
 }
