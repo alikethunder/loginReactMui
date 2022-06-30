@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useMatch } from 'react-router-dom';
 
 import { Session } from 'meteor/session';
 
@@ -27,6 +27,8 @@ export const AppTopBar = function () {
     Session.set('sidebarWideOpened', !state);
   }
 
+  let match = (to)=>useMatch(to);
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar  sx={{ zIndex: (theme) => theme.zIndex.drawer + 1, width: '100vw', left: '0'}}>
@@ -41,8 +43,8 @@ export const AppTopBar = function () {
             <MenuIcon />
           </IconButton>
 
-          <Button color="inherit" sx={{ flexGrow: 1 }} component={RouterLink} to="/">
-            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+          <Button color="inherit" sx={{ flexGrow: 1 }} component={RouterLink} to="/" disabled={!!match('/')}>
+            <Typography variant="h6" component="div" sx={{ flexGrow: 1, color: 'white' }} >
               Site title
             </Typography>
           </Button>

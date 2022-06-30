@@ -1,9 +1,9 @@
 import React from 'react';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useMatch } from 'react-router-dom';
 
 import { useTracker } from 'meteor/react-meteor-data';
 
-import Box from '@mui/material/Box';
+import { useTheme } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import Menu from '@mui/material/Menu';
@@ -20,10 +20,16 @@ import PasswordIcon from '@mui/icons-material/Password';
 import LoginIcon from '@mui/icons-material/Login';
 import LogoutIcon from '@mui/icons-material/Logout';
 import ForwardToInboxIcon from '@mui/icons-material/ForwardToInbox';
+import { alpha } from '@mui/material/styles';
+
+import DisabledTheme from './DisabledTheme';
 
 import { useSnackbar } from 'notistack';
 
 export default function LoginButtons(props) {
+
+    const theme = useTheme();
+
     const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
     const user = useTracker(() => Meteor.user());
@@ -57,41 +63,50 @@ export default function LoginButtons(props) {
         setAnchorEl(null);
     };
 
+    let match = (to)=>useMatch(to);
+
     return (
         <React.Fragment>
-
-            {props.inSidebar ?
-                user ?
-                    <ListItemButton color="inherit" onClick={logout}>
-                        <ListItemIcon>
-                            <LogoutIcon />
-                        </ListItemIcon>
-                        <ListItemText primary='Logout' />
-                    </ListItemButton>
+            <DisabledTheme>
+                {props.inSidebar ?
+                    user ?
+                        <ListItemButton onClick={logout}>
+                            <ListItemIcon>
+                                <LogoutIcon />
+                            </ListItemIcon>
+                            <ListItemText primary='Logout' />
+                        </ListItemButton>
+                        :
+                        <ListItemButton component={RouterLink} to="/signin" disabled={!!match('/signin')} sx={{
+                            ...(!!match('/signin') && {
+                                bgcolor: alpha(theme.palette.primary.main, 0.5),
+                            }),
+                            '&:hover': {
+                                bgcolor: alpha(theme.palette.primary.light, 0.3),
+                            }
+                        }}>
+                            <ListItemIcon>
+                                <LoginIcon />
+                            </ListItemIcon>
+                            <ListItemText primary='Login' />
+                        </ListItemButton>
                     :
-                    <ListItemButton color="inherit" component={RouterLink} to="/signin">
-                        <ListItemIcon>
-                            <LoginIcon />
-                        </ListItemIcon>
-                        <ListItemText primary='Login' />
-                    </ListItemButton>
-                :
-                user ? <Button color="inherit" startIcon={<LogoutIcon />} onClick={logout}>Logout</Button> :
-                    <Button color="inherit" startIcon={<LoginIcon />} component={RouterLink} to="/signin">Login</Button>}
+                    user ? <Button color="inherit" startIcon={<LogoutIcon />} onClick={logout}>Logout</Button> :
+                        <Button color="inherit" startIcon={<LoginIcon />} component={RouterLink} to="/signin" disabled={!!match('/signin')}>Login</Button>}
 
-            <IconButton
-                aria-label="ArrowDropDownIcon"
-                size="large"
-                color="inherit"
+                <IconButton
+                    aria-label="ArrowDropDownIcon"
+                    size="large"
+                    color="inherit"
 
-                onClick={handleClick}
-                aria-controls={open ? 'account-menu' : undefined}
-                aria-haspopup="true"
-                aria-expanded={open ? 'true' : undefined}
-            >
-                <ArrowDropDownIcon fontSize="inherit" />
-            </IconButton>
-
+                    onClick={handleClick}
+                    aria-controls={open ? 'account-menu' : undefined}
+                    aria-haspopup="true"
+                    aria-expanded={open ? 'true' : undefined}
+                >
+                    <ArrowDropDownIcon fontSize="inherit" />
+                </IconButton>
+            </DisabledTheme>
             <Menu
                 anchorEl={anchorEl}
                 id="account-menu"

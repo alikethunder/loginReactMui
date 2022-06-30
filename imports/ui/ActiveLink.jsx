@@ -3,19 +3,16 @@ import { Link as RouterLink, useMatch } from 'react-router-dom';
 
 
 import { useTheme } from '@mui/material/styles';
-import { alpha } from '@mui/material/styles'
+import { alpha } from '@mui/material/styles';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 
-export default function ActiveLink({ icon, label, to, activeOnlyWhenExact }) {
+export default function ActiveLink({ icon, label, to}) {
 
     const theme = useTheme();
     
-    let match = useMatch({
-        path: to,
-        exact: activeOnlyWhenExact
-    });
+    let match = useMatch(to);
 
     return (
         <ListItemButton component={RouterLink} to={to}
