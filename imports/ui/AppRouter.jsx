@@ -45,7 +45,7 @@ export default function AppRouter() {
       autoHideDuration={2500}
 
       action={(key) => (
-        <IconButton onClick={onClickDismiss(key)}
+        <IconButton onClick={() => closeSnackbar(key)}
           size="large"
           edge="start"
           color="inherit"

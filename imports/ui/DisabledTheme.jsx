@@ -22,7 +22,6 @@ export default function DisabledTheme(props) {
                         },
                         [`&.${toggleButtonClasses.root}.${buttonClasses.disabled}`]: {
                             color: defaultTheme.palette.text.primary,
-                            //borderColor: defaultTheme.palette.action.disabledBackground
                         }
                     }
                 }

@@ -27,7 +27,6 @@ export default function Content(props) {
     const location = useLocation();
     const [displayLocation, setDisplayLocation] = React.useState(location);
     const [transitionStage, setTransistionStage] = React.useState("fadeIn");
-
     React.useEffect(() => {
         if (location !== displayLocation) setTransistionStage("fadeOut");
     }, [location]);
