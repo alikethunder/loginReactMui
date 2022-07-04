@@ -6,13 +6,16 @@ import '/imports/api/methods/email';
 //collections
 import { PostsCollection } from '/imports/db/posts';
 import { TranslationsCollection } from '/imports/db/translations';
+import { SettingsCollection } from '/imports/db/settings';
+
 
 //publications
 import '/imports/db/publications/posts';
 //import '/imports/db/publications/translations';
+import '/imports/db/publications/settings';
 
 function insertText(text) {
-  PostsCollection.insert({text});
+  PostsCollection.insert({ text });
 }
 
 Meteor.startup(() => {
@@ -105,4 +108,11 @@ Meteor.startup(() => {
     Donec ullamcorper nulla non metus auctor fringilla. Nulla vitae elit libero, a pharetra augue.`,
     );
   }
+
+  SettingsCollection.upsert({
+    _id: 'languages'
+  },
+    {
+      languages: [{ abbr: 'en', name: 'English' }, { abbr: 'ru', name: 'Русский' }]
+    });
 });

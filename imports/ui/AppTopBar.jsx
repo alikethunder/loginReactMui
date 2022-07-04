@@ -9,6 +9,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
+import TranslationMenu from './TranslationMenu';
 import LoginButtons from './LoginButtons';
 import Typography from '@mui/material/Typography';
 
@@ -46,6 +47,7 @@ export const AppTopBar = function () {
             </Typography>
           </Button>
 
+          <TranslationMenu/>
           <LoginButtons />
 
         </Toolbar>

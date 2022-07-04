@@ -112,7 +112,7 @@ export default function LoginButtons(props) {
                     horizontal: 'right',
                 }}
             >
-                <MenuList dense>
+                <MenuList dense sx={{py:0}}>
                     {user ? '' :
                         [
                             <MenuItem key='1' component={RouterLink} to="/signup">
