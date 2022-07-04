@@ -14,9 +14,6 @@ import Typography from '@mui/material/Typography';
 
 export const AppTopBar = function () {
 
-  Session.setDefault('sidebarMobileOpened', Meteor._localStorage.getItem('sidebarMobileOpened') === 'true');
-  Session.setDefault('sidebarWideOpened', Meteor._localStorage.getItem('sidebarWideOpened') === 'true');
-
   const toggleSidebarOpened = () => {
     let mobileState = Session.get('sidebarMobileOpened');
     Meteor._localStorage.setItem('sidebarMobileOpened', !mobileState);

@@ -1,10 +1,15 @@
 import { Meteor } from 'meteor/meteor';
+
 //Methods
 import '/imports/api/methods/email';
+
 //collections
 import { PostsCollection } from '/imports/db/posts';
+import { TranslationsCollection } from '/imports/db/translations';
+
 //publications
 import '/imports/db/publications/posts';
+//import '/imports/db/publications/translations';
 
 function insertText(text) {
   PostsCollection.insert({text});

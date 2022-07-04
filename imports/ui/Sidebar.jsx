@@ -22,9 +22,6 @@ function Sidebar(props) {
 
     const drawerWidth = props.drawerWidth;
 
-    Session.setDefault('sidebarMobileOpened', Meteor._localStorage.getItem('sidebarMobileOpened') === 'true');
-    Session.setDefault('sidebarWideOpened', Meteor._localStorage.getItem('sidebarWideOpened') === 'true');
-
     const { window } = props;
 
     const closeMobileSidebar = () => {

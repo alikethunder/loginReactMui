@@ -4,6 +4,11 @@ import ReactDOM from "react-dom/client";
 import AppRouter from '/imports/ui/AppRouter';
 
 Meteor.startup(() => {
+
+   //set default variables for sidebar
+   Session.setDefault('sidebarMobileOpened', Meteor._localStorage.getItem('sidebarMobileOpened') === 'true');
+   Session.setDefault('sidebarWideOpened', Meteor._localStorage.getItem('sidebarWideOpened') === 'true');
+   
    //if page is not refreshed or it's not a new tab && remember me was not checked logout user
    window.addEventListener('load', function () {
       if (!sessionStorage.getItem('refresh') && Meteor._localStorage.getItem('rememberUser') === 'false') {
