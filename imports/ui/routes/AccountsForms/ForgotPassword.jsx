@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link as RouterLink } from 'react-router-dom';
+import { LinkWithQuery } from '/imports/ui/LinkWithQuery';
 
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
@@ -112,12 +112,12 @@ export default function ForgotPassword() {
                     </Button>
                     <Grid container>
                         <Grid item xs>
-                            <Link component={RouterLink} to="/signin" variant="body2">
+                            <Link component={LinkWithQuery} to="/signin" variant="body2">
                                 Sign in
                             </Link>
                         </Grid>
                         <Grid item>
-                            <Link component={RouterLink} to="/signup" variant="body2">
+                            <Link component={LinkWithQuery} to="/signup" variant="body2">
                                 {"Don't have an account? Sign Up"}
                             </Link>
                         </Grid>

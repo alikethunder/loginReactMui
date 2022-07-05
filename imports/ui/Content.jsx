@@ -1,23 +1,23 @@
 import React from 'react';
-
-import { useTracker } from 'meteor/react-meteor-data';
-
 import {
+    Navigate,
     Routes,
     Route,
     useLocation
 } from "react-router-dom";
 
+import { useTracker } from 'meteor/react-meteor-data';
+
 import { useTheme } from '@mui/material/styles';
 
 import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
 
 import SignIn from './routes/AccountsForms/SignIn';
 import SignUp from './routes/AccountsForms/SignUp';
 import ForgotPassword from './routes/AccountsForms/ForgotPassword';
 import Home from './routes/Home';
 import Info from './routes/Info';
+import PageLoading from './PageLoading';
 
 export default function Content(props) {
 
@@ -25,6 +25,7 @@ export default function Content(props) {
 
     //page transitions
     const location = useLocation();
+
     const [displayLocation, setDisplayLocation] = React.useState(location);
     const [transitionStage, setTransistionStage] = React.useState("fadeIn");
     React.useEffect(() => {
@@ -35,11 +36,14 @@ export default function Content(props) {
 
     const wideOpen = useTracker(() => Session.get('sidebarWideOpened'));
 
+    const user = useTracker(() => Meteor.user());
+
+    const loggingIn = useTracker(() => Meteor.loggingIn());
+
     return (
         <Box component="main"
             sx={{
                 flexGrow: { sm: 1 },
-                padding: { sm: theme.spacing(3) },
                 transition: {
                     sm: theme.transitions.create('margin', {
                         easing: theme.transitions.easing.sharp,
@@ -65,15 +69,14 @@ export default function Content(props) {
                     setDisplayLocation(location);
                 }
             }} >
-            <Toolbar variant="dense" />
 
             <Routes location={displayLocation}>
 
-                <Route path="signin" element={<SignIn />} />
+                <Route path="signin" element={loggingIn ? <PageLoading /> : user ? <Home /> : <SignIn />} />
 
-                <Route path="signup" element={<SignUp />} />
+                <Route path="signup" element={loggingIn ? <PageLoading /> : user ? <Home /> : <SignUp />} />
 
-                <Route path="forgot_password" element={<ForgotPassword />} />
+                <Route path="forgot_password" element={loggingIn ? <PageLoading /> : user ? <Home /> : <ForgotPassword />} />
 
                 <Route path="/dashboard" element={<Info />} />
 
@@ -83,3 +86,7 @@ export default function Content(props) {
         </Box>
     )
 };
+
+const OnlyForUnsignedUsers = ({ children, user }) => {
+    return user ? <Navigate to='/' replace /> : children
+}

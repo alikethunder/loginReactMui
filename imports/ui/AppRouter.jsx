@@ -10,6 +10,7 @@ import Sidebar from './Sidebar';
 import IconButton from '@mui/material/IconButton';
 import CancelIcon from '@mui/icons-material/Cancel';
 import PriorityHighIcon from '@mui/icons-material/PriorityHigh';
+import Toolbar from '@mui/material/Toolbar';
 
 import Content from './Content';
 
@@ -60,6 +61,7 @@ export default function AppRouter() {
 
         <CssBaseline />
         <AppTopBar />
+            <Toolbar variant="dense" />
         <Sidebar drawerWidth={drawerWidth} />
 
         <Content drawerWidth={drawerWidth} />

@@ -1,5 +1,9 @@
 import * as React from 'react';
-import { useNavigate, Link as RouterLink } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
+
+import { useTracker } from 'meteor/react-meteor-data';
+
+import { LinkWithQuery } from '/imports/ui/LinkWithQuery';
 
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
@@ -22,6 +26,7 @@ import { useSnackbar } from 'notistack';
 export default function SignIn() {
 
   let navigate = useNavigate();
+  const { search } = useLocation();
 
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
@@ -67,7 +72,8 @@ export default function SignIn() {
         closeSnackbar();
         enqueueSnackbar('Signed in successfully ', {variant: 'success', preventDuplicate: true});
         Meteor._localStorage.setItem('rememberUser', rememberUser);
-        navigate("/");
+        sessionStorage.setItem('refresh', true);
+        navigate(`/${search}`);
       });
     }
     else {
@@ -170,12 +176,12 @@ export default function SignIn() {
           </Button>
           <Grid container>
             <Grid item xs>
-              <Link component={RouterLink} to="/forgot_password" variant="body2">
+              <Link component={LinkWithQuery} to="/forgot_password" variant="body2">
                 Forgot password?
               </Link>
             </Grid>
             <Grid item>
-              <Link component={RouterLink} to="/signup" variant="body2">
+              <Link component={LinkWithQuery} to="/signup" variant="body2">
                 {"Don't have an account? Sign Up"}
               </Link>
             </Grid>
