@@ -67,7 +67,6 @@ export default function SignIn() {
         closeSnackbar();
         enqueueSnackbar('Signed in successfully ', {variant: 'success', preventDuplicate: true});
         Meteor._localStorage.setItem('rememberUser', rememberUser);
-        sessionStorage.setItem('refresh', true);
         navigate("/");
       });
     }

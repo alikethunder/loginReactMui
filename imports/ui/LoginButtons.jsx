@@ -1,5 +1,6 @@
 import React from 'react';
-import { Link as RouterLink, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+import { LinkWithQuery } from './LinkWithQuery';
 
 import { useTracker } from 'meteor/react-meteor-data';
 
@@ -79,7 +80,7 @@ export default function LoginButtons(props) {
                         <ActiveLink to="/signin" label="Login" icon={<LoginIcon />} />
                     :
                     user ? <Button color="inherit" startIcon={<LogoutIcon />} onClick={logout}>Logout</Button> :
-                        <Button color="inherit" startIcon={<LoginIcon />} component={RouterLink} to="/signin" disabled={location.pathname == '/signin'}>Login</Button>}
+                        <Button color="inherit" startIcon={<LoginIcon />} component={LinkWithQuery} to="/signin" disabled={location.pathname == '/signin'}>Login</Button>}
 
                 <IconButton
                     aria-label="ArrowDropDownIcon"
@@ -115,7 +116,7 @@ export default function LoginButtons(props) {
                 <MenuList dense sx={{py:0}}>
                     {user ? '' :
                         [
-                            <MenuItem key='1' component={RouterLink} to="/signup">
+                            <MenuItem key='1' component={LinkWithQuery} to="/signup">
                                 <ListItemIcon>
                                     <AssignmentIcon fontSize="small" />
                                 </ListItemIcon>
@@ -124,7 +125,7 @@ export default function LoginButtons(props) {
 
                             <Divider key='2' />,
 
-                            <MenuItem key='3' component={RouterLink} to="/forgot_password">
+                            <MenuItem key='3' component={LinkWithQuery} to="/forgot_password">
                                 <ListItemIcon>
                                     <PasswordIcon fontSize="small" />
                                 </ListItemIcon>

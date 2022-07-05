@@ -82,7 +82,6 @@ export default function SignUp() {
         enqueueSnackbar('Signed up successfully ', { variant: 'success', preventDuplicate: true });
         Meteor.call('email.sendVerification');
         Meteor._localStorage.setItem('rememberUser', rememberUser);
-        sessionStorage.setItem('refresh', true);
         navigate("/");
       });
     } else {

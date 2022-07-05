@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link as RouterLink, useLocation } from 'react-router-dom';
+import { Link as RouterLink, useSearchParams } from 'react-router-dom';
 
 import { useTracker } from 'meteor/react-meteor-data';
 
@@ -15,9 +15,12 @@ import TranslateIcon from '@mui/icons-material/Translate';
 
 import { SettingsCollection } from '/imports/db/settings';
 
-export default function TranslationMenu(props) {
+export default function TranslationMenu() {
 
-    const languageSettingsSub = Meteor.subscribe('languageSettings');
+    Meteor.subscribe('languageSettings');
+
+
+  let [searchParams, setSearchParams] = useSearchParams();
 
     const languageSettings = useTracker(() => { return SettingsCollection.findOne({ _id: 'languages' }) });
 
@@ -68,13 +71,13 @@ export default function TranslationMenu(props) {
                 <MenuList dense sx={{ py: 0 }}>
                     {languageSettings && languageSettings.languages.map((l, i, a) => {
                         return (i + 1 == a.length) ?
-                         (<MenuItem key={l.abbr} >
+                         (<MenuItem key={l.abbr} onClick={(e)=>{e.nativeEvent.stopImmediatePropagation();setSearchParams({'language':l.abbr})}}>
                             <ListItemIcon>
                                 <AssignmentIcon fontSize="small" />
                             </ListItemIcon>
                             {l.name}
                         </MenuItem>)
-                        : [<MenuItem key={l.abbr} >
+                        : [<MenuItem key={l.abbr} onClick={(e)=>{e.nativeEvent.stopImmediatePropagation();setSearchParams({'language':l.abbr})}}>
                             <ListItemIcon>
                                 <AssignmentIcon fontSize="small" />
                             </ListItemIcon>

@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { Link as RouterLink, useMatch } from 'react-router-dom';
+import { useMatch } from 'react-router-dom';
+import { LinkWithQuery } from './LinkWithQuery';
 
 import { Session } from 'meteor/session';
 
@@ -41,7 +42,7 @@ export const AppTopBar = function () {
             <MenuIcon />
           </IconButton>
 
-          <Button color="inherit" sx={{ flexGrow: 1 }} component={RouterLink} to="/" disabled={!!match('/')}>
+          <Button color="inherit" sx={{ flexGrow: 1 }} component={LinkWithQuery} to="/" disabled={!!match('/')}>
             <Typography variant="h6" component="div" sx={{ flexGrow: 1, color: 'white' }} >
               Site title
             </Typography>

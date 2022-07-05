@@ -7,4 +7,6 @@ function translation (translatableKey, language) {
     
     let lang = language || l;
     //return TranslationsCollection.find
+
+    return 
 }
