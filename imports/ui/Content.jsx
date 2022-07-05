@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-    Navigate,
     Routes,
     Route,
     useLocation
@@ -17,7 +16,7 @@ import SignUp from './routes/AccountsForms/SignUp';
 import ForgotPassword from './routes/AccountsForms/ForgotPassword';
 import Home from './routes/Home';
 import Info from './routes/Info';
-import PageLoading from './PageLoading';
+import OnlyForUnsignedUsers from './OnlyForUnsignedUsers';
 
 export default function Content(props) {
 
@@ -35,10 +34,6 @@ export default function Content(props) {
     const theme = useTheme();
 
     const wideOpen = useTracker(() => Session.get('sidebarWideOpened'));
-
-    const user = useTracker(() => Meteor.user());
-
-    const loggingIn = useTracker(() => Meteor.loggingIn());
 
     return (
         <Box component="main"
@@ -72,11 +67,23 @@ export default function Content(props) {
 
             <Routes location={displayLocation}>
 
-                <Route path="signin" element={loggingIn ? <PageLoading /> : user ? <Home /> : <SignIn />} />
+                <Route path="signin" element={
+                    <OnlyForUnsignedUsers>
+                        <SignIn />
+                    </OnlyForUnsignedUsers>
+                } />
 
-                <Route path="signup" element={loggingIn ? <PageLoading /> : user ? <Home /> : <SignUp />} />
+                <Route path="signup" element={
+                    <OnlyForUnsignedUsers>
+                        <SignUp />
+                    </OnlyForUnsignedUsers>
+                }/>
 
-                <Route path="forgot_password" element={loggingIn ? <PageLoading /> : user ? <Home /> : <ForgotPassword />} />
+                <Route path="forgot_password" element={
+                    <OnlyForUnsignedUsers>
+                        <ForgotPassword />
+                    </OnlyForUnsignedUsers>
+                } />
 
                 <Route path="/dashboard" element={<Info />} />
 
@@ -86,7 +93,3 @@ export default function Content(props) {
         </Box>
     )
 };
-
-const OnlyForUnsignedUsers = ({ children, user }) => {
-    return user ? <Navigate to='/' replace /> : children
-}
