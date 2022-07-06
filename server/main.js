@@ -11,7 +11,7 @@ import { SettingsCollection } from '/imports/db/settings';
 
 //publications
 import '/imports/db/publications/posts';
-//import '/imports/db/publications/translations';
+import '/imports/db/publications/translations';
 import '/imports/db/publications/settings';
 
 function insertText(text) {
@@ -115,4 +115,18 @@ Meteor.startup(() => {
     {
       languages: [{ abbr: 'en', name: 'English' }, { abbr: 'ru', name: 'Русский' }]
     });
+
+    TranslationsCollection.upsert({
+      _id: 'home'
+    },
+      {
+        en: 'home',
+        ru: 'Главная'
+      });
+      TranslationsCollection.upsert({
+        _id: 'dashboard'
+      },
+        {
+          en: 'dashboard',
+        });
 });

@@ -17,6 +17,7 @@ import Toolbar from '@mui/material/Toolbar';
 import LoginButtons from './LoginButtons';
 import ActiveLink from './ActiveLink';
 import DisabledTheme from './DisabledTheme';
+import Translation from './Translation';
 
 function Sidebar(props) {
 
@@ -52,10 +53,10 @@ function Sidebar(props) {
             <DisabledTheme>
                 <List sx={{ py: 0 }}>
                     <ListItem disablePadding >
-                        <ActiveLink to="/" label="Home" icon={<HomeIcon />} />
+                        <ActiveLink to="/" label={<Translation phrase='home' capitalize/>} icon={<HomeIcon />} />
                     </ListItem>
                     <ListItem disablePadding>
-                        <ActiveLink to="/dashboard" label="Dashboard" icon={<InfoIcon />} />
+                        <ActiveLink to="/dashboard" label={<Translation phrase='dashboard' capitalize/>} icon={<InfoIcon />} />
                     </ListItem>
                 </List>
             </DisabledTheme>
