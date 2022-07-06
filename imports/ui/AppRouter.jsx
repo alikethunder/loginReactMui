@@ -61,7 +61,9 @@ export default function AppRouter() {
 
         <CssBaseline />
         <AppTopBar />
-            <Toolbar variant="dense" />
+        
+        <Toolbar variant="dense" />
+
         <Sidebar drawerWidth={drawerWidth} />
 
         <Content drawerWidth={drawerWidth} />

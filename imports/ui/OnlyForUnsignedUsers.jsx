@@ -1,23 +1,18 @@
 import React from 'react';
 
+import {
+    Navigate, Outlet
+} from "react-router-dom";
+
 import { useTracker } from 'meteor/react-meteor-data';
 
 import PageLoading from './PageLoading';
-import Home from './routes/Home';
 
-export default function OnlyForUnsignedUsers ({ children }) {
+export default function OnlyForUnsignedUsers () {
 
     const user = useTracker(() => Meteor.user());
 
     const loggingIn = useTracker(() => Meteor.loggingIn());
-
-    if (loggingIn) {
-        return <PageLoading />;
-    }
-
-    if (user) {
-        return <Home />;
-    }
-
-    return children;
+    
+    return loggingIn ? <PageLoading /> : user ? <Navigate key='gohome' to='/' replace/> : <Outlet/>;
 }

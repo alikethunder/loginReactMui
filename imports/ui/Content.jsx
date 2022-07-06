@@ -4,6 +4,7 @@ import {
     Route,
     useLocation
 } from "react-router-dom";
+import FadeIn from 'react-fade-in';
 
 import { useTracker } from 'meteor/react-meteor-data';
 
@@ -22,18 +23,19 @@ export default function Content(props) {
 
     const drawerWidth = props.drawerWidth;
 
-    //page transitions
-    const location = useLocation();
-
-    const [displayLocation, setDisplayLocation] = React.useState(location);
-    const [transitionStage, setTransistionStage] = React.useState("fadeIn");
-    React.useEffect(() => {
-        if (location !== displayLocation) setTransistionStage("fadeOut");
-    }, [location]);
-
     const theme = useTheme();
 
     const wideOpen = useTracker(() => Session.get('sidebarWideOpened'));
+
+    const {pathname, search} = useLocation();
+    const locationForTransition = `${pathname}${search}`;
+
+    const [displayLocation, setDisplayLocation] = React.useState(locationForTransition);
+    const [transitionStage, setTransistionStage] = React.useState("fadeIn");
+
+    React.useEffect(() => {
+        if (locationForTransition !== displayLocation) setTransistionStage("fadeOut")
+    }, [locationForTransition]);
 
     return (
         <Box component="main"
@@ -56,38 +58,31 @@ export default function Content(props) {
                     marginLeft: { sm: `${drawerWidth}px` },
                 })
             }}
-
+            
             className={transitionStage}
             onAnimationEnd={() => {
                 if (transitionStage === "fadeOut") {
                     setTransistionStage("fadeIn");
-                    setDisplayLocation(location);
+                    setDisplayLocation(locationForTransition);
                 }
-            }} >
+            }}>
 
             <Routes location={displayLocation}>
+                
+                    <Route element={<OnlyForUnsignedUsers />}>
 
-                <Route path="signin" element={
-                    <OnlyForUnsignedUsers>
-                        <SignIn />
-                    </OnlyForUnsignedUsers>
-                } />
+                        <Route path="/signin" element={<SignIn />} />
 
-                <Route path="signup" element={
-                    <OnlyForUnsignedUsers>
-                        <SignUp />
-                    </OnlyForUnsignedUsers>
-                }/>
+                        <Route path="/signup" element={<SignUp />} />
 
-                <Route path="forgot_password" element={
-                    <OnlyForUnsignedUsers>
-                        <ForgotPassword />
-                    </OnlyForUnsignedUsers>
-                } />
+                        <Route path="/forgot_password" element={<ForgotPassword />} />
 
-                <Route path="/dashboard" element={<Info />} />
+                    </Route>
 
-                <Route path="/" element={<Home />} />
+                    <Route path="/dashboard" element={<Info />} />
+
+                    <Route path="/" element={<Home />} />
+                    
 
             </Routes>
         </Box>
