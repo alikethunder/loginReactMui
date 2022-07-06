@@ -6,7 +6,7 @@ import {
 
 import { useTracker } from 'meteor/react-meteor-data';
 
-import PageLoading from './PageLoading';
+import PageLoading from '/imports/ui/parts/PageLoading';
 
 export default function OnlyForUnsignedUsers () {
 

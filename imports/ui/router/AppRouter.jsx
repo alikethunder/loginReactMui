@@ -5,17 +5,17 @@ import {
 } from "react-router-dom";
 
 import CssBaseline from '@mui/material/CssBaseline';
-import { AppTopBar } from './AppTopBar';
-import Sidebar from './Sidebar';
 import IconButton from '@mui/material/IconButton';
 import CancelIcon from '@mui/icons-material/Cancel';
 import PriorityHighIcon from '@mui/icons-material/PriorityHigh';
 import Toolbar from '@mui/material/Toolbar';
-
-import Content from './Content';
-
 import { SnackbarProvider } from 'notistack';
 import Slide from '@mui/material/Slide';
+
+import Content from '/imports/ui/router/Content';
+import { AppTopBar } from '/imports/ui/parts/AppTopBar';
+import Sidebar from '/imports/ui/parts/Sidebar';
+
 
 // add action to all snackbars
 const notistackRef = React.createRef();

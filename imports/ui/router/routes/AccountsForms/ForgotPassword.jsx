@@ -1,5 +1,4 @@
 import React from 'react';
-import { LinkWithQuery } from '/imports/ui/LinkWithQuery';
 
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
@@ -12,6 +11,9 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 
 import { useSnackbar } from 'notistack';
+
+
+import { LinkWithQuery } from '/imports/ui/parts/links/LinkWithQuery';
 
 export default function ForgotPassword() {
 

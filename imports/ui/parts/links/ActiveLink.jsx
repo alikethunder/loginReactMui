@@ -1,12 +1,13 @@
 import React from 'react';
 import { useMatch } from 'react-router-dom';
-import { LinkWithQuery } from './LinkWithQuery';
 
 import { useTheme } from '@mui/material/styles';
 import { alpha } from '@mui/material/styles';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
+
+import { LinkWithQuery } from '/imports/ui/parts/links/LinkWithQuery';
 
 export default function ActiveLink({ icon, label, to }) {
 

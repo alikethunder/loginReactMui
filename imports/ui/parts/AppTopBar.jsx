@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { useMatch } from 'react-router-dom';
-import { LinkWithQuery } from './LinkWithQuery';
 
 import { Session } from 'meteor/session';
 
@@ -10,9 +9,11 @@ import Toolbar from '@mui/material/Toolbar';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
-import TranslationMenu from './TranslationMenu';
-import LoginButtons from './LoginButtons';
 import Typography from '@mui/material/Typography';
+
+import { LinkWithQuery } from '/imports/ui/parts/links/LinkWithQuery';
+import TranslationMenu from '/imports/ui/parts/translation/TranslationMenu';
+import LoginButtons from '/imports/ui/parts/LoginButtons';
 
 export const AppTopBar = function () {
 

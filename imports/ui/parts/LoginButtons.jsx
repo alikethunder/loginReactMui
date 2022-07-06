@@ -1,6 +1,5 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
-import { LinkWithQuery } from './LinkWithQuery';
 
 import { useTracker } from 'meteor/react-meteor-data';
 
@@ -20,9 +19,10 @@ import PasswordIcon from '@mui/icons-material/Password';
 import LoginIcon from '@mui/icons-material/Login';
 import LogoutIcon from '@mui/icons-material/Logout';
 import ForwardToInboxIcon from '@mui/icons-material/ForwardToInbox';
-import ActiveLink from './ActiveLink';
 
-import DisabledTheme from './DisabledTheme';
+import { LinkWithQuery } from '/imports/ui/parts/links/LinkWithQuery';
+import ActiveLink from '/imports/ui/parts/links/ActiveLink';
+import DisabledTheme from '/imports/ui/parts/DisabledTheme';
 
 import { useSnackbar } from 'notistack';
 

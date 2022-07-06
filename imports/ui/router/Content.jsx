@@ -4,7 +4,6 @@ import {
     Route,
     useLocation
 } from "react-router-dom";
-import FadeIn from 'react-fade-in';
 
 import { useTracker } from 'meteor/react-meteor-data';
 
@@ -12,12 +11,12 @@ import { useTheme } from '@mui/material/styles';
 
 import Box from '@mui/material/Box';
 
-import SignIn from './routes/AccountsForms/SignIn';
-import SignUp from './routes/AccountsForms/SignUp';
-import ForgotPassword from './routes/AccountsForms/ForgotPassword';
-import Home from './routes/Home';
-import Info from './routes/Info';
-import OnlyForUnsignedUsers from './OnlyForUnsignedUsers';
+import SignIn from '/imports/ui/router/routes/AccountsForms/SignIn';
+import SignUp from '/imports/ui/router/routes/AccountsForms/SignUp';
+import ForgotPassword from '/imports/ui/router/routes/AccountsForms/ForgotPassword';
+import Home from '/imports/ui/router/routes/Home';
+import Info from '/imports/ui/router/routes/Info';
+import OnlyForUnsignedUsers from '/imports/ui/router/OnlyForUnsignedUsers';
 
 export default function Content(props) {
 
@@ -83,7 +82,6 @@ export default function Content(props) {
 
                     <Route path="/" element={<Home />} />
                     
-
             </Routes>
         </Box>
     )

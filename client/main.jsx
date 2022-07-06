@@ -1,7 +1,8 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
 import ReactDOM from "react-dom/client";
-import AppRouter from '/imports/ui/AppRouter';
+
+import AppRouter from '/imports/ui/router/AppRouter';
 
 Meteor.startup(() => {
 

@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { useNavigate, useLocation } from "react-router-dom";
-import { LinkWithQuery } from '/imports/ui/LinkWithQuery';
 
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
@@ -21,6 +20,8 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { useSnackbar } from 'notistack';
 
 import { Accounts } from 'meteor/accounts-base';
+
+import { LinkWithQuery } from '/imports/ui/parts/links/LinkWithQuery';
 
 export default function SignUp() {
 

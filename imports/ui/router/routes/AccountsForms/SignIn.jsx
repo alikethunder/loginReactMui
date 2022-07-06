@@ -1,10 +1,6 @@
 import * as React from 'react';
 import { useNavigate, useLocation } from "react-router-dom";
 
-import { useTracker } from 'meteor/react-meteor-data';
-
-import { LinkWithQuery } from '/imports/ui/LinkWithQuery';
-
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
@@ -22,6 +18,8 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
 import { useSnackbar } from 'notistack';
+
+import { LinkWithQuery } from '/imports/ui/parts/links/LinkWithQuery';
 
 export default function SignIn() {
 

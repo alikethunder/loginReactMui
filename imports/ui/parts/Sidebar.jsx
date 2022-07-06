@@ -14,10 +14,10 @@ import HomeIcon from '@mui/icons-material/Home';
 import InfoIcon from '@mui/icons-material/Info';
 import Toolbar from '@mui/material/Toolbar';
 
-import LoginButtons from './LoginButtons';
-import ActiveLink from './ActiveLink';
-import DisabledTheme from './DisabledTheme';
-import Translation from './Translation';
+import LoginButtons from '/imports/ui/parts/LoginButtons';
+import ActiveLink from '/imports/ui/parts/links/ActiveLink';
+import DisabledTheme from '/imports/ui/parts/DisabledTheme';
+import Translation from '/imports/ui/parts/translation/Translation';
 
 function Sidebar(props) {
 
