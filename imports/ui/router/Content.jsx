@@ -2,7 +2,8 @@ import React from 'react';
 import {
     Routes,
     Route,
-    useLocation
+    useLocation,
+    useSearchParams
 } from "react-router-dom";
 
 import { useTracker } from 'meteor/react-meteor-data';
@@ -26,7 +27,9 @@ export default function Content(props) {
 
     const wideOpen = useTracker(() => Session.get('sidebarWideOpened'));
 
-    const {pathname} = useLocation();
+    const { pathname } = useLocation();
+
+    let [searchParams, setSearchParams] = useSearchParams();
 
     const [displayLocation, setDisplayLocation] = React.useState(pathname);
     const [transitionStage, setTransistionStage] = React.useState("fadeIn");
@@ -34,6 +37,11 @@ export default function Content(props) {
     React.useEffect(() => {
         if (pathname !== displayLocation) setTransistionStage("fadeOut")
     }, [pathname]);
+
+    React.useEffect(()=>{
+        let language = Meteor._localStorage.getItem('language') || 'en';
+        !searchParams.get('language') && setSearchParams({language});
+    }, []);
 
     return (
         <Box component="main"
@@ -56,7 +64,7 @@ export default function Content(props) {
                     marginLeft: { sm: `${drawerWidth}px` },
                 })
             }}
-            
+
             className={transitionStage}
             onAnimationEnd={() => {
                 if (transitionStage === "fadeOut") {
@@ -66,7 +74,7 @@ export default function Content(props) {
             }}>
 
             <Routes location={displayLocation}>
-                
+
                     <Route element={<OnlyForUnsignedUsers />}>
 
                         <Route path="/signin" element={<SignIn />} />
@@ -80,7 +88,7 @@ export default function Content(props) {
                     <Route path="/dashboard" element={<Info />} />
 
                     <Route path="/" element={<Home />} />
-                    
+
             </Routes>
         </Box>
     )

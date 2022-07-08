@@ -8,7 +8,6 @@ import Menu from '@mui/material/Menu';
 import MenuList from '@mui/material/MenuList';
 import MenuItem from '@mui/material/MenuItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
-import Divider from '@mui/material/Divider';
 
 import AssignmentIcon from '@mui/icons-material/Assignment';
 import TranslateIcon from '@mui/icons-material/Translate';
@@ -19,10 +18,9 @@ export default function TranslationMenu() {
 
     Meteor.subscribe('languageSettings');
 
+    let [searchParams, setSearchParams] = useSearchParams();
 
-  let [searchParams, setSearchParams] = useSearchParams();
-
-    const languageSettings = useTracker(() => { return SettingsCollection.findOne({ _id: 'languages' }) });
+    const languageSettings = useTracker(() => SettingsCollection.findOne({ _id: 'languages' }));
 
     const [anchorEl, setAnchorEl] = React.useState(null);
 
@@ -35,6 +33,13 @@ export default function TranslationMenu() {
     const handleClose = () => {
         setAnchorEl(null);
     };
+
+    const changeLanguage = (language) => {
+        
+        setSearchParams({ language });
+
+        Meteor._localStorage.setItem('language', language);
+    }
 
     return (
         <React.Fragment>
@@ -69,24 +74,14 @@ export default function TranslationMenu() {
                 }}
             >
                 <MenuList dense sx={{ py: 0 }}>
-                    {languageSettings && languageSettings.languages.map((l, i, a) => {
-                        return (i + 1 == a.length) ?
-                         (<MenuItem key={l.abbr} onClick={(e)=>{e.nativeEvent.stopImmediatePropagation();setSearchParams({'language':l.abbr})}}>
+                    {languageSettings && languageSettings.languages.map((l, i, a) =>
+                        <MenuItem key={l.abbr} onClick={() => changeLanguage(l.abbr)} divider={i + 1 !== a.length}>
                             <ListItemIcon>
                                 <AssignmentIcon fontSize="small" />
                             </ListItemIcon>
                             {l.name}
-                        </MenuItem>)
-                        : [<MenuItem key={l.abbr} onClick={(e)=>{e.nativeEvent.stopImmediatePropagation();setSearchParams({'language':l.abbr})}}>
-                            <ListItemIcon>
-                                <AssignmentIcon fontSize="small" />
-                            </ListItemIcon>
-                            {l.name}
-                        </MenuItem>,
-
-                        <Divider key={`divider${l.abbr}`} />]
-
-                        })}
+                        </MenuItem>
+                    )}
                 </MenuList>
             </Menu>
         </React.Fragment>
