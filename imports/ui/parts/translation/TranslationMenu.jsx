@@ -12,7 +12,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import AssignmentIcon from '@mui/icons-material/Assignment';
 import TranslateIcon from '@mui/icons-material/Translate';
 
-import { SettingsCollection } from '/imports/db/settings';
+import { SettingsCollection } from '/imports/db/collections/settings';
 
 export default function TranslationMenu() {
 

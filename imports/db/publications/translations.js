@@ -1,5 +1,5 @@
 import { Meteor } from 'meteor/meteor';
-import { TranslationsCollection } from '/imports/db/translations';
+import { TranslationsCollection } from '/imports/db/collections/translations';
 
 // publish phrase for language and for english for backup
 Meteor.publish('translation', function (phrase, language) {

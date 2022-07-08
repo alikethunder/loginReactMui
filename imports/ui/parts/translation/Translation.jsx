@@ -4,7 +4,7 @@ import { useSearchParams } from 'react-router-dom';
 import CircularProgress from '@mui/material/CircularProgress';
 
 import { useTracker } from 'meteor/react-meteor-data';
-import { TranslationsCollection } from '/imports/db/translations';
+import { TranslationsCollection } from '/imports/db/collections/translations';
 
 /// {phrase, capitalize} phrase - key in translations object for translation, capitalize - capitalize first letter
 export default function Translation({ phrase, size, capitalize, updateMenu }) {

@@ -15,7 +15,7 @@ import MainFeaturedPost from './MainFeaturedPost';
 import FeaturedPost from './FeaturedPost';
 import Main1 from './Main';
 import Footer from './Footer';
-import { PostsCollection } from '/imports/db/posts';
+import { PostsCollection } from '/imports/db/collections/posts';
 
 const sections = [
   { title: 'Technology', url: '#' },
