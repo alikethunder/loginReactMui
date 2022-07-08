@@ -20,6 +20,7 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { useSnackbar } from 'notistack';
 
 import { LinkWithQuery } from '/imports/ui/parts/links/LinkWithQuery';
+import Translation from '/imports/ui/parts/translation/Translation';
 
 export default function SignIn() {
 
@@ -162,7 +163,7 @@ export default function SignIn() {
           <FormControlLabel
             control={<Checkbox color="primary" checked={rememberUser} onChange={(e)=>setRememberUser(e.target.checked)}
             inputProps={{ 'aria-label': 'controlled' }}/>}
-            label="Remember me"
+            label={<Translation phrase='remember_me' size='0.5rem' capitalize/>}
           />
           <Button
             type="submit"
@@ -175,7 +176,7 @@ export default function SignIn() {
           <Grid container>
             <Grid item xs>
               <Link component={LinkWithQuery} to="/forgot_password" variant="body2">
-                Forgot password?
+              <Translation phrase='forgot_password' size='16px' capitalize/>
               </Link>
             </Grid>
             <Grid item>

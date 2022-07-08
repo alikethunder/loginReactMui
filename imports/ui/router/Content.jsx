@@ -26,15 +26,14 @@ export default function Content(props) {
 
     const wideOpen = useTracker(() => Session.get('sidebarWideOpened'));
 
-    const {pathname, search} = useLocation();
-    const locationForTransition = `${pathname}${search}`;
+    const {pathname} = useLocation();
 
-    const [displayLocation, setDisplayLocation] = React.useState(locationForTransition);
+    const [displayLocation, setDisplayLocation] = React.useState(pathname);
     const [transitionStage, setTransistionStage] = React.useState("fadeIn");
 
     React.useEffect(() => {
-        if (locationForTransition !== displayLocation) setTransistionStage("fadeOut")
-    }, [locationForTransition]);
+        if (pathname !== displayLocation) setTransistionStage("fadeOut")
+    }, [pathname]);
 
     return (
         <Box component="main"
@@ -62,7 +61,7 @@ export default function Content(props) {
             onAnimationEnd={() => {
                 if (transitionStage === "fadeOut") {
                     setTransistionStage("fadeIn");
-                    setDisplayLocation(locationForTransition);
+                    setDisplayLocation(pathname);
                 }
             }}>
 

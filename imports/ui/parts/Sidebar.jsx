@@ -53,10 +53,10 @@ function Sidebar(props) {
             <DisabledTheme>
                 <List sx={{ py: 0 }}>
                     <ListItem disablePadding >
-                        <ActiveLink to="/" label={<Translation phrase='home' capitalize/>} icon={<HomeIcon />} />
+                        <ActiveLink to="/" label={<Translation phrase='home' size={20} capitalize/>} icon={<HomeIcon />} />
                     </ListItem>
                     <ListItem disablePadding>
-                        <ActiveLink to="/dashboard" label={<Translation phrase='dashboard' capitalize/>} icon={<InfoIcon />} />
+                        <ActiveLink to="/dashboard" label={<Translation phrase='dashboard' size={20} capitalize/>} icon={<InfoIcon />} />
                     </ListItem>
                 </List>
             </DisabledTheme>

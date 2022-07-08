@@ -116,17 +116,58 @@ Meteor.startup(() => {
       languages: [{ abbr: 'en', name: 'English' }, { abbr: 'ru', name: 'Русский' }]
     });
 
+  TranslationsCollection.upsert({
+    _id: 'home'
+  },
+    {
+      en: 'home',
+      ru: 'главная'
+    });
+
+  TranslationsCollection.upsert({
+    _id: 'dashboard'
+  },
+    {
+      en: 'dashboard',
+    });
+
     TranslationsCollection.upsert({
-      _id: 'home'
+      _id: 'login'
     },
       {
-        en: 'home',
-        ru: 'Главная'
+        en: 'sign in',
+        ru: 'войти'
       });
+
       TranslationsCollection.upsert({
-        _id: 'dashboard'
+        _id: 'logout'
       },
         {
-          en: 'dashboard',
+          en: 'logout',
+          ru: 'выйти'
         });
+
+    TranslationsCollection.upsert({
+      _id: 'signup'
+    },
+      {
+        en: 'sign up',
+        ru: 'регистрация'
+      });
+
+    TranslationsCollection.upsert({
+      _id: 'forgot_password'
+    },
+      {
+        en: 'Password recovery',
+        ru: 'восстановить пароль'
+      });
+
+    TranslationsCollection.upsert({
+      _id: 'remember_me'
+    },
+      {
+        en: 'remember me',
+        ru: 'запомнить меня'
+      });
 });

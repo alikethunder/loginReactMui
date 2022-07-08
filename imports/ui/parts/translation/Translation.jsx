@@ -7,8 +7,8 @@ import { useTracker } from 'meteor/react-meteor-data';
 import { TranslationsCollection } from '/imports/db/translations';
 
 /// {phrase, capitalize} phrase - key in translations object for translation, capitalize - capitalize first letter
-export default function Translation({ phrase, capitalize }) {
-
+export default function Translation({ phrase, size, capitalize, updateMenu }) {
+    
     let [searchParams, setSearchParams] = useSearchParams();
 
     const searchParamsLang = searchParams.get('language');
@@ -23,6 +23,6 @@ export default function Translation({ phrase, capitalize }) {
     });
     
     return (
-        !ready ? <CircularProgress size='0.9rem' sx={{ml: 4}} /> : capitalize ? `${translation[0].toUpperCase()}${translation.slice(1)}` : translation
+        !ready ? <CircularProgress size={size} sx={{ml: 4}} color='inherit' /> : capitalize ? `${translation[0].toUpperCase()}${translation.slice(1)}` : translation
     )
 }

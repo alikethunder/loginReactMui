@@ -23,6 +23,7 @@ import ForwardToInboxIcon from '@mui/icons-material/ForwardToInbox';
 import { LinkWithQuery } from '/imports/ui/parts/links/LinkWithQuery';
 import ActiveLink from '/imports/ui/parts/links/ActiveLink';
 import DisabledTheme from '/imports/ui/parts/DisabledTheme';
+import Translation from '/imports/ui/parts/translation/Translation';
 
 import { useSnackbar } from 'notistack';
 
@@ -36,11 +37,12 @@ export default function LoginButtons(props) {
 
     const user = useTracker(() => Meteor.user());
 
-
     const open = Boolean(anchorEl);
 
     const handleClick = (event) => {
+       // !props.inSidebar && setTimeout(()=>window.dispatchEvent(new Event('resize')));
         setAnchorEl(event.currentTarget);
+        
     };
 
     const logout = () => {
@@ -77,25 +79,29 @@ export default function LoginButtons(props) {
                             <ListItemText primary='Logout' />
                         </ListItemButton>
                         :
-                        <ActiveLink to="/signin" label="Login" icon={<LoginIcon />} />
+                        <ActiveLink to="/signin" label={<Translation phrase='login' size={20} capitalize />} icon={<LoginIcon />} />
                     :
-                    user ? <Button color="inherit" startIcon={<LogoutIcon />} onClick={logout}>Logout</Button> :
-                        <Button color="inherit" startIcon={<LoginIcon />} component={LinkWithQuery} to="/signin" disabled={location.pathname == '/signin'}>Login</Button>}
-
-                <IconButton
-                    aria-label="ArrowDropDownIcon"
-                    size="large"
-                    color="inherit"
-
-                    onClick={handleClick}
-                    aria-controls={open ? 'account-menu' : undefined}
-                    aria-haspopup="true"
-                    aria-expanded={open ? 'true' : undefined}
-                    sx={{ p: '4px' }}
-                >
-                    <ArrowDropDownIcon fontSize="inherit" />
-                </IconButton>
+                    user ? <Button color="inherit" startIcon={<LogoutIcon />} onClick={logout}><Translation phrase='logout' size={20} capitalize /></Button>
+                        :
+                        <Button color="inherit" startIcon={<LoginIcon />} component={LinkWithQuery} to="/signin" disabled={location.pathname == '/signin'}>
+                            <Translation phrase='login' size={20} capitalize />
+                        </Button>
+                }
             </DisabledTheme>
+
+            <IconButton
+                aria-label="ArrowDropDownIcon"
+                size="large"
+                color="inherit"
+
+                onClick={handleClick}
+                aria-controls='account-menu'
+                aria-haspopup="true"
+                aria-expanded='true'
+                sx={{ p: '4px' }}
+            >
+                <ArrowDropDownIcon fontSize="inherit" />
+            </IconButton>
             <Menu
                 disableScrollLock={true}
                 anchorEl={anchorEl}
@@ -106,30 +112,32 @@ export default function LoginButtons(props) {
                 dense="true"
                 anchorOrigin={{
                     vertical: 'bottom',
-                    horizontal: 'right',
+                    horizontal: props.inSidebar ? 'center' : 'right',
                 }}
                 transformOrigin={{
                     vertical: 'top',
-                    horizontal: 'right',
+                    horizontal: props.inSidebar ? 'center' : 215,
                 }}
+
+                sx={{width: '250px'}}
             >
-                <MenuList dense sx={{py:0}}>
+                <MenuList dense sx={{ py: 0 }}>
                     {user ? '' :
                         [
                             <MenuItem key='1' component={LinkWithQuery} to="/signup">
                                 <ListItemIcon>
                                     <AssignmentIcon fontSize="small" />
                                 </ListItemIcon>
-                                Sign up
+                                <Translation phrase='signup' size={20} capitalize />
                             </MenuItem>,
 
                             <Divider key='2' />,
 
-                            <MenuItem key='3' component={LinkWithQuery} to="/forgot_password">
+                            <MenuItem key='3' component={LinkWithQuery} to="/forgot_password" onChange={(e) => console.log(e)}>
                                 <ListItemIcon>
                                     <PasswordIcon fontSize="small" />
                                 </ListItemIcon>
-                                Forgot password
+                                <Translation phrase='forgot_password' size={20} capitalize />
                             </MenuItem>
                         ]
                     }
