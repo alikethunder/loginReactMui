@@ -38,9 +38,25 @@ export default function Content(props) {
         if (pathname !== displayLocation) setTransistionStage("fadeOut")
     }, [pathname]);
 
-    React.useEffect(()=>{
-        let language = Meteor._localStorage.getItem('language') || 'en';
-        !searchParams.get('language') && setSearchParams({language});
+    React.useEffect(() => {
+        if (!searchParams.get('language')) {
+            let language = Meteor._localStorage.getItem('language');
+
+            if (language) {
+                setSearchParams({ language });
+            }
+            else {
+                let browserLanguage = navigator.userLanguage || navigator.language || navigator.browserLanguage || navigator.systemLanguage;
+                browserLanguage = browserLanguage.slice(0, 2);
+                Meteor.call('language.checkExistence', browserLanguage, (e, languageExist) => {
+                    if (e) {
+                        console.log('language.checkExistence method error ', e);
+                        return
+                    }
+                    setSearchParams({ language: languageExist && browserLanguage || 'en' });
+                })
+            }
+        }
     }, []);
 
     return (
@@ -75,19 +91,19 @@ export default function Content(props) {
 
             <Routes location={displayLocation}>
 
-                    <Route element={<OnlyForUnsignedUsers />}>
+                <Route element={<OnlyForUnsignedUsers />}>
 
-                        <Route path="/signin" element={<SignIn />} />
+                    <Route path="/signin" element={<SignIn />} />
 
-                        <Route path="/signup" element={<SignUp />} />
+                    <Route path="/signup" element={<SignUp />} />
 
-                        <Route path="/forgot_password" element={<ForgotPassword />} />
+                    <Route path="/forgot_password" element={<ForgotPassword />} />
 
-                    </Route>
+                </Route>
 
-                    <Route path="/dashboard" element={<Info />} />
+                <Route path="/dashboard" element={<Info />} />
 
-                    <Route path="/" element={<Home />} />
+                <Route path="/" element={<Home />} />
 
             </Routes>
         </Box>

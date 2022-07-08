@@ -2,6 +2,7 @@ import { Meteor } from 'meteor/meteor';
 
 //Methods
 import '/imports/api/methods/email';
+import '/imports/api/methods/language';
 
 //collections
 import { PostsCollection } from '/imports/db/collections/posts';
