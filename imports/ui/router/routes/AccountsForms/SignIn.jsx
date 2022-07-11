@@ -77,7 +77,7 @@ export default function SignIn() {
     }
     else {
       console.log('there are errors');
-      
+
       enqueueSnackbar(<Translation phrase='fill_all_fields_properly' size='0.5rem' capitalize />, { variant: 'error', preventDuplicate: true });
     }
   };
@@ -108,7 +108,7 @@ export default function SignIn() {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-        {<Translation phrase='login' size='0.5rem' capitalize />}
+          {<Translation phrase='login' size='0.5rem' capitalize />}
         </Typography>
         <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
           <TextField name="email"

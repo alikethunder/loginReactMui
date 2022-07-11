@@ -108,5 +108,21 @@ TranslationsCollection.upsert({
 },
   {
     en: "Signed in",
-    ru: "вход"
+    ru: "Успешный вход"
+  });
+
+TranslationsCollection.upsert({
+  _id: "signed_up"
+},
+  {
+    en: "Signed up",
+    ru: "Регистрация прошла успешно"
+  });
+
+TranslationsCollection.upsert({
+  _id: "confirm_password"
+},
+  {
+    en: "confirm password",
+    ru: "подтверждение пароля"
   });

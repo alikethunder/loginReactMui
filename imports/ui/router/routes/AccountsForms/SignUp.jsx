@@ -22,6 +22,7 @@ import { useSnackbar } from 'notistack';
 import { Accounts } from 'meteor/accounts-base';
 
 import { LinkWithQuery } from '/imports/ui/parts/links/LinkWithQuery';
+import Translation from '/imports/ui/parts/translation/Translation';
 
 export default function SignUp() {
 
@@ -82,7 +83,7 @@ export default function SignUp() {
         }
         console.log('sign up success ');
         closeSnackbar();
-        enqueueSnackbar('Signed up successfully ', { variant: 'success', preventDuplicate: true });
+        enqueueSnackbar(<Translation phrase='signed_up' size='0.5rem' capitalize />, { variant: 'success', preventDuplicate: true });
         Meteor.call('email.sendVerification');
         Meteor._localStorage.setItem('rememberUser', rememberUser);
         sessionStorage.setItem('refresh', true);
@@ -91,7 +92,7 @@ export default function SignUp() {
     } else {
       console.log('there are errors');
 
-      enqueueSnackbar('Fill all fields properly, please', { variant: 'error', preventDuplicate: true });
+      enqueueSnackbar(<Translation phrase='fill_all_fields_properly' size='0.5rem' capitalize />, { variant: 'error', preventDuplicate: true });
     }
   };
 
@@ -122,7 +123,7 @@ export default function SignUp() {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign up
+          <Translation phrase='signup' size='0.5rem' capitalize />
         </Typography>
         <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
           <TextField name="email"
@@ -130,7 +131,7 @@ export default function SignUp() {
             required
             fullWidth
             id="email"
-            label="Email Address"
+            label={<Translation phrase='email_address' size='0.5rem' capitalize />}
             autoComplete="email"
             autoFocus
 
@@ -139,7 +140,7 @@ export default function SignUp() {
             onChange={setAndValidateEmail}
 
             error={!emailIsValid}
-            helperText={!emailIsValid ? "Incorrect email" : ' '}
+            helperText={!emailIsValid ? <Translation phrase='incorrect_email' size='0.5rem' capitalize /> : ' '}
             sx={{ mb: 0 }}
           />
 
@@ -147,14 +148,14 @@ export default function SignUp() {
             margin="normal"
             required
             fullWidth
-            label="Password"
+            label={<Translation phrase='password' size='0.5rem' capitalize />}
             type={showPassword ? 'text' : 'password'}
             id="password"
             onChange={(e) => { setPassword(e.target.value); setPasswordsMatch(confirmPassword == e.target.value); }}
             onBlur={(e) => setPasswordFirstBlur(true)}
 
             error={!password.length && passwordFirstBlur}
-            helperText={(!password.length && passwordFirstBlur) ? "Password Required" : ' '}
+            helperText={(!password.length && passwordFirstBlur) ? <Translation phrase='password_required' size='0.5rem' capitalize /> : ' '}
 
             sx={{ mb: 0 }}
 
@@ -162,7 +163,7 @@ export default function SignUp() {
               endAdornment:
                 <InputAdornment position="end" >
                   <IconButton
-                    aria-label="toggle password visibility"
+                    aria-label={<Translation phrase='toggle_password_visibility' size='0.5rem' capitalize />}
                     onClick={handleClickShowPassword}
                     onMouseDown={handleMouseDownPassword}
                     edge="end"
@@ -177,7 +178,7 @@ export default function SignUp() {
             margin="normal"
             required
             fullWidth
-            label="Confirm password"
+            label={<Translation phrase='confirm_password' size='0.5rem' capitalize />}
             type={showPassword ? 'text' : 'password'}
             id="confirm_password"
 
@@ -191,7 +192,7 @@ export default function SignUp() {
               endAdornment:
                 <InputAdornment position="end" >
                   <IconButton
-                    aria-label="toggle password visibility"
+                    aria-label={<Translation phrase='toggle_password_visibility' size='0.5rem' capitalize />}
                     onClick={handleClickShowPassword}
                     onMouseDown={handleMouseDownPassword}
                     edge="end"
@@ -205,7 +206,7 @@ export default function SignUp() {
           <FormControlLabel
             control={<Checkbox checked={rememberUser} color="primary" onChange={(e) => setRememberUser(e.target.checked)}
               inputProps={{ 'aria-label': 'controlled' }} />}
-            label="Remember me"
+            label={<Translation phrase='remember_me' size='0.5rem' capitalize />}
           />
           <Button
             type="submit"
@@ -213,17 +214,17 @@ export default function SignUp() {
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
           >
-            Sign Up
+            <Translation phrase='signup' size='0.5rem' capitalize />
           </Button>
           <Grid container>
             <Grid item xs>
               <Link component={LinkWithQuery} to="/forgot_password" variant="body2">
-                Forgot password?
+                <Translation phrase='forgot_password' size='16px' capitalize />
               </Link>
             </Grid>
             <Grid item>
               <Link component={LinkWithQuery} to="/signin" variant="body2">
-                {"Have an account? Sign In"}
+                {<Translation phrase='login' size='0.5rem' capitalize />}
               </Link>
             </Grid>
           </Grid>
