@@ -39,13 +39,12 @@ export default function Content(props) {
     }, [pathname]);
 
     React.useEffect(() => {
+        let languageInSearchParams = searchParams.get('language');
         if (!searchParams.get('language')) {
-            let language = Meteor._localStorage.getItem('language');
+            let languageInLocalStorage = Meteor._localStorage.getItem('language');
+            let language = '';
 
-            if (language) {
-                setSearchParams({ language });
-            }
-            else {
+            if (!languageInLocalStorage) {
                 let browserLanguage = navigator.userLanguage || navigator.language || navigator.browserLanguage || navigator.systemLanguage;
                 browserLanguage = browserLanguage.slice(0, 2);
                 Meteor.call('language.checkExistence', browserLanguage, (e, languageExist) => {
@@ -53,9 +52,16 @@ export default function Content(props) {
                         console.log('language.checkExistence method error ', e);
                         return
                     }
-                    setSearchParams({ language: languageExist && browserLanguage || 'en' });
+                    language = languageExist && browserLanguage || 'en';
                 })
             }
+            language = languageInLocalStorage || language;
+
+            setSearchParams({ language });
+            Session.set('language', language);
+        }
+        else {
+            Session.set('language', languageInSearchParams);
         }
     }, []);
 

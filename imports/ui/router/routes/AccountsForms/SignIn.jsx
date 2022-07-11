@@ -53,7 +53,7 @@ export default function SignIn() {
     event.preventDefault();
 
     setPasswordFirstBlur(true);
-    
+
     if (emailIsValid && password.length) {
       console.log({
         email
@@ -61,24 +61,24 @@ export default function SignIn() {
       Meteor.loginWithPassword({
         email
       },
-      password, (e)=>{
-        if (e){
-          console.log('sign in error ', e);
-          enqueueSnackbar(e.reason, {variant: 'error', preventDuplicate: true});
-          return
-        }
-        console.log('sign in success ');
-        closeSnackbar();
-        enqueueSnackbar('Signed in successfully ', {variant: 'success', preventDuplicate: true});
-        Meteor._localStorage.setItem('rememberUser', rememberUser);
-        sessionStorage.setItem('refresh', true);
-        navigate(`/${search}`);
-      });
+        password, (e) => {
+          if (e) {
+            console.log('sign in error ', e);
+            enqueueSnackbar(e.reason, { variant: 'error', preventDuplicate: true });
+            return
+          }
+          console.log('sign in success ');
+          closeSnackbar();
+          enqueueSnackbar(<Translation phrase='signed_in' size='0.5rem' capitalize />, { variant: 'success', preventDuplicate: true });
+          Meteor._localStorage.setItem('rememberUser', rememberUser);
+          sessionStorage.setItem('refresh', true);
+          navigate(`/${search}`);
+        });
     }
     else {
       console.log('there are errors');
-
-      enqueueSnackbar('Fill all fields properly, please', {variant: 'error', preventDuplicate: true});
+      
+      enqueueSnackbar(<Translation phrase='fill_all_fields_properly' size='0.5rem' capitalize />, { variant: 'error', preventDuplicate: true });
     }
   };
 
@@ -108,7 +108,7 @@ export default function SignIn() {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign in
+        {<Translation phrase='login' size='0.5rem' capitalize />}
         </Typography>
         <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
           <TextField name="email"
@@ -116,7 +116,7 @@ export default function SignIn() {
             required
             fullWidth
             id="email"
-            label="Email Address"
+            label={<Translation phrase='email_address' size='0.5rem' capitalize />}
             autoComplete="email"
             autoFocus
 
@@ -124,7 +124,7 @@ export default function SignIn() {
 
             onChange={setAndValidateEmail}
             error={!emailIsValid}
-            helperText={!emailIsValid ? "Incorrect email" : ' '}
+            helperText={!emailIsValid ? <Translation phrase='incorrect_email' size='0.5rem' capitalize /> : ' '}
             sx={{ mb: 0 }}
           />
 
@@ -132,16 +132,16 @@ export default function SignIn() {
             margin="normal"
             required
             fullWidth
-            label="Password"
+            label={<Translation phrase='password' size='0.5rem' capitalize />}
             type={showPassword ? 'text' : 'password'}
             id="password"
             autoComplete="current-password"
 
-            onChange={(e)=>setPassword(e.target.value)}
-            onBlur={(e)=>setPasswordFirstBlur(true)}
+            onChange={(e) => setPassword(e.target.value)}
+            onBlur={(e) => setPasswordFirstBlur(true)}
 
             error={!password.length && passwordFirstBlur}
-            helperText={(!password.length && passwordFirstBlur) ? "Password Required" : ' '}
+            helperText={(!password.length && passwordFirstBlur) ? <Translation phrase='password_required' size='0.5rem' capitalize /> : ' '}
 
             sx={{ mb: 0 }}
 
@@ -149,7 +149,7 @@ export default function SignIn() {
               endAdornment:
                 <InputAdornment position="end" >
                   <IconButton
-                    aria-label="toggle password visibility"
+                    aria-label={<Translation phrase='toggle_password_visibility' size='0.5rem' capitalize />}
                     onClick={handleClickShowPassword}
                     onMouseDown={handleMouseDownPassword}
                     edge="end"
@@ -161,9 +161,9 @@ export default function SignIn() {
           />
 
           <FormControlLabel
-            control={<Checkbox color="primary" checked={rememberUser} onChange={(e)=>setRememberUser(e.target.checked)}
-            inputProps={{ 'aria-label': 'controlled' }}/>}
-            label={<Translation phrase='remember_me' size='0.5rem' capitalize/>}
+            control={<Checkbox color="primary" checked={rememberUser} onChange={(e) => setRememberUser(e.target.checked)}
+              inputProps={{ 'aria-label': 'controlled' }} />}
+            label={<Translation phrase='remember_me' size='0.5rem' capitalize />}
           />
           <Button
             type="submit"
@@ -171,17 +171,17 @@ export default function SignIn() {
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
           >
-            Sign In
+            {<Translation phrase='login' size='0.5rem' capitalize />}
           </Button>
           <Grid container>
             <Grid item xs>
               <Link component={LinkWithQuery} to="/forgot_password" variant="body2">
-              <Translation phrase='forgot_password' size='16px' capitalize/>
+                <Translation phrase='forgot_password' size='16px' capitalize />
               </Link>
             </Grid>
             <Grid item>
               <Link component={LinkWithQuery} to="/signup" variant="body2">
-                {"Don't have an account? Sign Up"}
+                <Translation phrase='signup' size='16px' capitalize />
               </Link>
             </Grid>
           </Grid>

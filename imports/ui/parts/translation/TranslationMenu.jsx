@@ -39,6 +39,7 @@ export default function TranslationMenu() {
         setSearchParams({ language });
 
         Meteor._localStorage.setItem('language', language);
+        Session.set('language',language);
     }
 
     return (
