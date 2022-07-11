@@ -120,6 +120,14 @@ TranslationsCollection.upsert({
   });
 
 TranslationsCollection.upsert({
+  _id: "logged_out"
+},
+  {
+    en: "Logged out",
+    ru: "Успешный выход"
+  });
+
+TranslationsCollection.upsert({
   _id: "confirm_password"
 },
   {
@@ -165,4 +173,20 @@ TranslationsCollection.upsert({
   {
     en: "Send reset password email",
     ru: "Отправить письмо для восстановления пароля"
+  });
+
+TranslationsCollection.upsert({
+  _id: "send_verification_email"
+},
+  {
+    en: "Send verification email",
+    ru: "подтвердить почту"
+  });
+
+TranslationsCollection.upsert({
+  _id: "sent_email_verification_email"
+},
+  {
+    en: "Sent email verification. Please check your mailbox",
+    ru: "Письмо для подтверждения адреса электронной почты отправлено. Пожалуйста, проверьте свою почтовый ящик"
   });

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
@@ -25,7 +25,6 @@ import Translation from '/imports/ui/parts/translation/Translation';
 export default function SignIn() {
 
   let navigate = useNavigate();
-  const { search } = useLocation();
 
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
@@ -72,7 +71,6 @@ export default function SignIn() {
           enqueueSnackbar(<Translation phrase='signed_in' size='0.5rem' capitalize />, { variant: 'success', preventDuplicate: true });
           Meteor._localStorage.setItem('rememberUser', rememberUser);
           sessionStorage.setItem('refresh', true);
-          navigate(`/${search}`);
         });
     }
     else {

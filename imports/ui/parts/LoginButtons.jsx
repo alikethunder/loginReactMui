@@ -51,7 +51,7 @@ export default function LoginButtons(props) {
                 enqueueSnackbar(e.reason, { variant: 'error', preventDuplicate: true });
                 return
             }
-            enqueueSnackbar('Logged out successfully ', { variant: 'success', preventDuplicate: true });
+            enqueueSnackbar(<Translation phrase='logged_out' size={20} capitalize />, { variant: 'success', preventDuplicate: true });
         });
     }
 
@@ -60,7 +60,7 @@ export default function LoginButtons(props) {
             console.log('error email.sendVerification ', e);
             return
         }
-        enqueueSnackbar('Sent email verification. Please check your mailbox', { variant: 'success', preventDuplicate: true });
+        enqueueSnackbar(<Translation phrase='sent_email_verification_email' size={20} capitalize />, { variant: 'success', preventDuplicate: true });
     });
 
     const handleClose = () => {
@@ -76,7 +76,7 @@ export default function LoginButtons(props) {
                             <ListItemIcon>
                                 <LogoutIcon />
                             </ListItemIcon>
-                            <ListItemText primary='Logout' />
+                            <ListItemText primary={<Translation phrase='logout' size={20} capitalize />} />
                         </ListItemButton>
                         :
                         <ActiveLink to="/signin" label={<Translation phrase='login' size={20} capitalize />} icon={<LoginIcon />} />
@@ -149,7 +149,7 @@ export default function LoginButtons(props) {
                             <ListItemIcon>
                                 <ForwardToInboxIcon fontSize="small" />
                             </ListItemIcon>
-                            Send verification email
+                            <Translation phrase='send_verification_email' size={20} capitalize />
                         </MenuItem>
                         :
                         ''
