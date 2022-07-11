@@ -126,3 +126,43 @@ TranslationsCollection.upsert({
     en: "confirm password",
     ru: "подтверждение пароля"
   });
+
+TranslationsCollection.upsert({
+  _id: "passwords_do_not_match"
+},
+  {
+    en: "Passwords do not match",
+    ru: "пароли не совпадают"
+  });
+
+TranslationsCollection.upsert({
+  _id: "no_account_with_such_email"
+},
+  {
+    en: "There is no account with such email",
+    ru: "Аккаунта с данным электронным адресом не существует"
+  });
+
+TranslationsCollection.upsert({
+  _id: "sent_reset_password_email"
+},
+  {
+    en: "Sent reset password email. Please, check you mailbox",
+    ru: "Письмо для восстановления пароля отправлено. Пожалуйста, проверьте свою почту"
+  });
+
+TranslationsCollection.upsert({
+  _id: "enter_real_email"
+},
+  {
+    en: "Please enter real email",
+    ru: "Пожалуйста, введите настоящий электронный адрес"
+  });
+
+TranslationsCollection.upsert({
+  _id: "send_reset_password_email"
+},
+  {
+    en: "Send reset password email",
+    ru: "Отправить письмо для восстановления пароля"
+  });

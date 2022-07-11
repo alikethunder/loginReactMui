@@ -184,7 +184,7 @@ export default function SignUp() {
 
             onChange={setAndValidateConfirmPassword}
             error={!passwordsMatch}
-            helperText={!passwordsMatch ? "Passwords do not match" : ' '}
+            helperText={!passwordsMatch ? <Translation phrase='passwords_do_not_match' size='0.5rem' capitalize /> : ' '}
 
             sx={{ mb: 0 }}
 

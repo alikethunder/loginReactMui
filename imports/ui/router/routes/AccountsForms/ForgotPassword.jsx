@@ -14,6 +14,7 @@ import { useSnackbar } from 'notistack';
 
 
 import { LinkWithQuery } from '/imports/ui/parts/links/LinkWithQuery';
+import Translation from '/imports/ui/parts/translation/Translation';
 
 export default function ForgotPassword() {
 
@@ -42,14 +43,14 @@ export default function ForgotPassword() {
             console.log({
                 email
             });
-            Meteor.call('email.checkExistence', email, (e, r)=>{
-                if (e){
+            Meteor.call('email.checkExistence', email, (e, r) => {
+                if (e) {
                     console.log('email.checkExistence method error ', e);
                     return
                 }
-                if (r){
+                if (r) {
                     console.log('email.checkExistence method result ', r);
-                    enqueueSnackbar('There is no account with such email', { variant: 'error', preventDuplicate: true });
+                    enqueueSnackbar(<Translation phrase='no_account_with_such_email' size='0.5rem' capitalize />, { variant: 'error', preventDuplicate: true });
                     return
                 }
                 Meteor.call('email.sendResetPassword', email, (e) => {
@@ -60,13 +61,13 @@ export default function ForgotPassword() {
                     }
                     console.log('sent reset password success ');
                     closeSnackbar();
-                    enqueueSnackbar('Sent reset password email. Please, check you mailbox', { variant: 'success', preventDuplicate: true });
+                    enqueueSnackbar(<Translation phrase='sent_reset_password_email' size='0.5rem' capitalize />, { variant: 'success', preventDuplicate: true });
                 });
             });
         }
         else {
             console.log('there are errors');
-            enqueueSnackbar('Please enter real email', { variant: 'error', preventDuplicate: true });
+            enqueueSnackbar(<Translation phrase='enter_real_email' size='0.5rem' capitalize />, { variant: 'error', preventDuplicate: true });
         }
     };
 
@@ -84,7 +85,7 @@ export default function ForgotPassword() {
                     <LockOutlinedIcon />
                 </Avatar>
                 <Typography component="h1" variant="h5">
-                    Forgot password
+                    <Translation phrase='forgot_password' size='0.5rem' capitalize />
                 </Typography>
                 <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
                     <TextField name="email"
@@ -92,7 +93,7 @@ export default function ForgotPassword() {
                         required
                         fullWidth
                         id="email"
-                        label="Email Address"
+                        label={<Translation phrase='email_address' size='0.5rem' capitalize />}
                         autoComplete="email"
                         autoFocus
 
@@ -100,7 +101,7 @@ export default function ForgotPassword() {
 
                         onChange={setAndValidateEmail}
                         error={!emailIsValid}
-                        helperText={!emailIsValid ? "Incorrect email" : ' '}
+                        helperText={!emailIsValid ? <Translation phrase='incorrect_email' size='0.5rem' capitalize /> : ' '}
                         sx={{ mb: 0 }}
                     />
 
@@ -110,17 +111,17 @@ export default function ForgotPassword() {
                         variant="contained"
                         sx={{ mt: 3, mb: 2 }}
                     >
-                        Send reset password email
+                        <Translation phrase='send_reset_password_email' size='0.5rem' capitalize />
                     </Button>
                     <Grid container>
                         <Grid item xs>
                             <Link component={LinkWithQuery} to="/signin" variant="body2">
-                                Sign in
+                                <Translation phrase='login' size='0.5rem' capitalize />
                             </Link>
                         </Grid>
                         <Grid item>
                             <Link component={LinkWithQuery} to="/signup" variant="body2">
-                                {"Don't have an account? Sign Up"}
+                                <Translation phrase='signup' size='16px' capitalize />
                             </Link>
                         </Grid>
                     </Grid>
